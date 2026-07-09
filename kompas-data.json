@@ -1,0 +1,351 @@
+{
+  "version": "KOMPAS Praktijkpilot v1.0",
+  "locations": [
+    "Hal",
+    "Meterkast",
+    "Woonkamer",
+    "Keuken",
+    "Gang",
+    "Toilet",
+    "Badkamer",
+    "Slaapkamer 1",
+    "Slaapkamer 2",
+    "Slaapkamer 3",
+    "Technische ruimte",
+    "Berging",
+    "Balkon",
+    "Galerij",
+    "Gevel",
+    "Buitenruimte voor",
+    "Buitenruimte achter"
+  ],
+  "observations": [
+    {
+      "id": "lakbeschadiging",
+      "name": "Lakbeschadiging",
+      "category": "Afwerking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt",
+      "notOn": [
+        "Scharnier",
+        "Deurbeslag",
+        "Slot",
+        "Cilinder",
+        "Rubber",
+        "Beglazing",
+        "Kitvoeg",
+        "Tegel"
+      ],
+      "suggestIfInvalid": "Beschadiging"
+    },
+    {
+      "id": "beschadiging",
+      "name": "Beschadiging",
+      "category": "Beschadiging",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "smet",
+      "name": "Smet",
+      "category": "Afwerking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "vervuiling",
+      "name": "Vervuiling",
+      "category": "Afwerking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "schrale_dekking",
+      "name": "Schrale dekking",
+      "category": "Afwerking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "oneffenheid",
+      "name": "Oneffenheid",
+      "category": "Afwerking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "gat",
+      "name": "Gat",
+      "category": "Materiaal",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "scheur",
+      "name": "Scheur",
+      "category": "Materiaal",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "barst",
+      "name": "Barst",
+      "category": "Materiaal",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "open_voeg",
+      "name": "Open voeg",
+      "category": "Afdichting",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "kitonderbreking",
+      "name": "Kitonderbreking",
+      "category": "Afdichting",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "manco",
+      "name": "Manco",
+      "category": "Montage",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "niet_compleet",
+      "name": "Niet compleet",
+      "category": "Montage",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "niet_afgemonteerd",
+      "name": "Niet afgemonteerd",
+      "category": "Montage",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "los_onderdeel",
+      "name": "Los onderdeel",
+      "category": "Montage",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "sluit_niet_aan",
+      "name": "Sluit niet aan",
+      "category": "Montage",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "werkt_niet",
+      "name": "Werkt niet",
+      "category": "Werking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "sluit_niet",
+      "name": "Sluit niet",
+      "category": "Werking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "loopt_aan",
+      "name": "Loopt aan",
+      "category": "Werking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "klemt",
+      "name": "Klemt",
+      "category": "Werking",
+      "cardType": "registratie",
+      "advice": "Opleverpunt"
+    },
+    {
+      "id": "beglazing_beschadigd",
+      "name": "Beglazing beschadigd",
+      "category": "Discussiekaart",
+      "cardType": "discussie",
+      "advice": "KOMPAS-inschatting"
+    }
+  ],
+  "objects": [
+    {
+      "id": "deur",
+      "name": "Deur",
+      "types": [
+        "Binnendeur",
+        "Buitendeur"
+      ],
+      "parts": [
+        "Deurblad",
+        "Scharnier",
+        "Deurbeslag",
+        "Slot",
+        "Cilinder",
+        "Rubber",
+        "Beglazing"
+      ]
+    },
+    {
+      "id": "kozijn",
+      "name": "Kozijn",
+      "types": [
+        "Stalen montagekozijn",
+        "Houten kozijn",
+        "Kunststof kozijn",
+        "Aluminium kozijn"
+      ],
+      "parts": [
+        "Bovenstijl",
+        "Zijstijl links",
+        "Zijstijl rechts",
+        "Onderdorpel",
+        "Aansluiting",
+        "Rubber",
+        "Beslag"
+      ]
+    },
+    {
+      "id": "wand",
+      "name": "Wand",
+      "types": [
+        "Afgewerkte wand"
+      ],
+      "parts": [
+        "Wandvlak",
+        "Binnenhoek",
+        "Buitenhoek",
+        "Aansluiting plafond",
+        "Aansluiting vloer"
+      ]
+    },
+    {
+      "id": "plafond",
+      "name": "Plafond",
+      "types": [
+        "Spackwerk",
+        "Spuitwerk"
+      ],
+      "parts": [
+        "Plafondvlak",
+        "Aansluiting wand",
+        "Sparing"
+      ]
+    },
+    {
+      "id": "vloer",
+      "name": "Vloer",
+      "types": [
+        "Dekvloer",
+        "Afgewerkte vloer"
+      ],
+      "parts": [
+        "Vloervlak",
+        "Aansluiting dorpel",
+        "Aansluiting wand"
+      ]
+    },
+    {
+      "id": "tegelwerk",
+      "name": "Tegelwerk",
+      "types": [
+        "Wandtegelwerk",
+        "Vloertegelwerk"
+      ],
+      "parts": [
+        "Tegel",
+        "Voeg",
+        "Kitvoeg",
+        "Inwendige hoek",
+        "Uitwendige hoek",
+        "Aansluiting drain"
+      ]
+    },
+    {
+      "id": "beglazing",
+      "name": "Beglazing",
+      "types": [
+        "Meerbladig isolatieglas"
+      ],
+      "parts": [
+        "Beglazing"
+      ]
+    },
+    {
+      "id": "sanitair",
+      "name": "Sanitair",
+      "types": [
+        "Toilet",
+        "Fontein",
+        "Wastafel",
+        "Douche",
+        "Bad"
+      ],
+      "parts": [
+        "Toestel",
+        "Aansluiting",
+        "Afvoer",
+        "Kraan"
+      ]
+    },
+    {
+      "id": "installatie",
+      "name": "Installatie",
+      "types": [
+        "Ventilatie",
+        "Elektra",
+        "Verwarming",
+        "Rookmelder",
+        "Groepenkast",
+        "Intercom"
+      ],
+      "parts": [
+        "Ventiel",
+        "Bediening",
+        "Afdekraam",
+        "Rookmelder",
+        "Thermostaat"
+      ]
+    },
+    {
+      "id": "keuken",
+      "name": "Keuken",
+      "types": [
+        "Keuken"
+      ],
+      "parts": [
+        "Werkblad",
+        "Front",
+        "Kast",
+        "Lade",
+        "Spoelbak",
+        "Kookplaat"
+      ]
+    },
+    {
+      "id": "trap",
+      "name": "Trap",
+      "types": [
+        "Trap"
+      ],
+      "parts": [
+        "Trede",
+        "Stootbord",
+        "Trapboom",
+        "Leuning",
+        "Balustrade"
+      ]
+    }
+  ]
+}
