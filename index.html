@@ -1,32 +1,264 @@
-<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KOMPAS Praktijkpilot v1.0</title><style>
-:root{--bg:#f6f5f1;--card:#fff;--txt:#1e1f21;--muted:#6b6f76;--line:#ddd7cb;--accent:#233142;--soft:#eef0f3}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}header{background:var(--accent);color:white;padding:16px;position:sticky;top:0;z-index:5}header h1{font-size:20px;margin:0}header p{margin:4px 0 0;color:#d9dde3;font-size:13px}main{max-width:940px;margin:0 auto;padding:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}h2{font-size:18px;margin:0 0 10px}h3{font-size:15px;margin:14px 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;text-align:left;font-size:15px;cursor:pointer}button:hover{background:var(--soft)}.small{font-size:12px;color:var(--muted);display:block;margin-top:4px}select,input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font-size:15px;background:white}label{display:block;margin:10px 0 4px;font-weight:600}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.actions button{background:var(--accent);color:white;text-align:center;border-color:var(--accent)}.actions button.secondary{background:white;color:var(--accent)}.output{white-space:pre-wrap;background:#f8f8f8;border:1px solid var(--line);padding:12px;border-radius:12px;font-size:15px;line-height:1.45}.hidden{display:none!important}.pill{display:inline-block;background:#eef0f3;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:12px;margin:2px}.warn{background:#fff7df;border-color:#eed28d}.topnav{display:flex;gap:8px;margin-top:10px}.topnav button{color:white;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);padding:8px 10px}@media(max-width:600px){main{padding:8px}.grid{grid-template-columns:1fr 1fr}button{padding:10px;font-size:14px}}
-</style></head><body><header><h1>KOMPAS Praktijkpilot v1.0</h1><p>Registratiekaarten + D-001 Beglazing beschadigd</p><div class="topnav"><button onclick="show('start')">Start</button><button onclick="show('log')">Logboek</button><button onclick="resetAll()">Nieuwe vastlegging</button></div></header><main>
-<section id="start" class="card"><h2>Wat heb je waargenomen?</h2><input id="searchObs" placeholder="Zoek waarneming..." oninput="renderObservations()"><div id="obsList" class="grid" style="margin-top:10px"></div></section>
-<section id="form" class="card hidden"><h2 id="formTitle"></h2><div id="breadcrumbs"></div><label>Object</label><select id="object" onchange="onObjectChange()"></select><label>Type</label><select id="type" onchange="renderOutput()"></select><label>Onderdeel</label><select id="part" onchange="renderOutput()"></select><label>Locatie</label><select id="location" onchange="renderOutput()"></select>
-<div id="glassBlock" class="hidden"><h3>D-001 Beglazing beschadigd</h3><label>Aan welke zijde bevindt de beschadiging zich?</label><select id="glassSide" onchange="renderOutput()"><option>Binnenzijde</option><option>Buitenzijde</option><option>Spouwzijde</option></select><label>Bevindt de beschadiging zich in de randzone?</label><select id="glassEdge" onchange="renderOutput()"><option>Nee</option><option>Ja</option></select><label>Is de beschadiging zichtbaar vanaf de gebruikelijke beoordelingsafstand?</label><select id="glassDistance" onchange="renderOutput()"><option>Ja</option><option>Nee</option></select><label>Onder welke omstandigheden is de beschadiging geconstateerd?</label><select id="glassWeather" onchange="renderOutput()"><option>Diffuus daglicht / bewolkt</option><option>Direct zonlicht</option><option>Kunstlicht</option></select></div>
-<label>Aanvullende toelichting inspecteur (optioneel)</label><textarea id="extra" rows="3" oninput="renderOutput()" placeholder="Alleen gebruiken als de standaardtekst onvoldoende is."></textarea><div id="termWarning" class="card warn hidden"></div><h3>Titel</h3><div id="titleOut" class="output"></div><h3>Beschrijving</h3><div id="descOut" class="output"></div><h3>Advies</h3><div id="adviceOut" class="output"></div><div id="reasonBlock" class="hidden"><h3>KOMPAS-onderbouwing</h3><div id="reasonOut" class="output"></div></div><div class="actions"><button onclick="copyText('titleOut')">Titel kopiëren</button><button onclick="copyText('descOut')">Beschrijving kopiëren</button><button onclick="copyText('adviceOut')">Advies kopiëren</button><button class="secondary" onclick="show('start')">Andere waarneming</button></div></section>
-<section id="log" class="card hidden"><h2>KOMPAS Logboek</h2><p class="small">Noteer wat ontbreekt of niet lekker loopt.</p><label>Gemiste kaart / verbetering</label><textarea id="logText" rows="8" placeholder="Bijv. waterslag beschadigd, tekst loopt niet lekker bij ventiel..."></textarea><div class="actions"><button onclick="downloadLog()">Logboek downloaden</button><button class="secondary" onclick="show('start')">Terug</button></div></section>
-</main><script>const DATA = {"version": "KOMPAS Praktijkpilot v1.0", "locations": ["Hal", "Meterkast", "Woonkamer", "Keuken", "Gang", "Toilet", "Badkamer", "Slaapkamer 1", "Slaapkamer 2", "Slaapkamer 3", "Technische ruimte", "Berging", "Balkon", "Galerij", "Gevel", "Buitenruimte voor", "Buitenruimte achter"], "observations": [{"id": "lakbeschadiging", "name": "Lakbeschadiging", "category": "Afwerking", "cardType": "registratie", "advice": "Opleverpunt", "notOn": ["Scharnier", "Deurbeslag", "Slot", "Cilinder", "Rubber", "Beglazing", "Kitvoeg", "Tegel"], "suggestIfInvalid": "Beschadiging"}, {"id": "beschadiging", "name": "Beschadiging", "category": "Beschadiging", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "smet", "name": "Smet", "category": "Afwerking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "vervuiling", "name": "Vervuiling", "category": "Afwerking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "schrale_dekking", "name": "Schrale dekking", "category": "Afwerking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "oneffenheid", "name": "Oneffenheid", "category": "Afwerking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "gat", "name": "Gat", "category": "Materiaal", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "scheur", "name": "Scheur", "category": "Materiaal", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "barst", "name": "Barst", "category": "Materiaal", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "open_voeg", "name": "Open voeg", "category": "Afdichting", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "kitonderbreking", "name": "Kitonderbreking", "category": "Afdichting", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "manco", "name": "Manco", "category": "Montage", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "niet_compleet", "name": "Niet compleet", "category": "Montage", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "niet_afgemonteerd", "name": "Niet afgemonteerd", "category": "Montage", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "los_onderdeel", "name": "Los onderdeel", "category": "Montage", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "sluit_niet_aan", "name": "Sluit niet aan", "category": "Montage", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "werkt_niet", "name": "Werkt niet", "category": "Werking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "sluit_niet", "name": "Sluit niet", "category": "Werking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "loopt_aan", "name": "Loopt aan", "category": "Werking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "klemt", "name": "Klemt", "category": "Werking", "cardType": "registratie", "advice": "Opleverpunt"}, {"id": "beglazing_beschadigd", "name": "Beglazing beschadigd", "category": "Discussiekaart", "cardType": "discussie", "advice": "KOMPAS-inschatting"}], "objects": [{"id": "deur", "name": "Deur", "types": ["Binnendeur", "Buitendeur"], "parts": ["Deurblad", "Scharnier", "Deurbeslag", "Slot", "Cilinder", "Rubber", "Beglazing"]}, {"id": "kozijn", "name": "Kozijn", "types": ["Stalen montagekozijn", "Houten kozijn", "Kunststof kozijn", "Aluminium kozijn"], "parts": ["Bovenstijl", "Zijstijl links", "Zijstijl rechts", "Onderdorpel", "Aansluiting", "Rubber", "Beslag"]}, {"id": "wand", "name": "Wand", "types": ["Afgewerkte wand"], "parts": ["Wandvlak", "Binnenhoek", "Buitenhoek", "Aansluiting plafond", "Aansluiting vloer"]}, {"id": "plafond", "name": "Plafond", "types": ["Spackwerk", "Spuitwerk"], "parts": ["Plafondvlak", "Aansluiting wand", "Sparing"]}, {"id": "vloer", "name": "Vloer", "types": ["Dekvloer", "Afgewerkte vloer"], "parts": ["Vloervlak", "Aansluiting dorpel", "Aansluiting wand"]}, {"id": "tegelwerk", "name": "Tegelwerk", "types": ["Wandtegelwerk", "Vloertegelwerk"], "parts": ["Tegel", "Voeg", "Kitvoeg", "Inwendige hoek", "Uitwendige hoek", "Aansluiting drain"]}, {"id": "beglazing", "name": "Beglazing", "types": ["Meerbladig isolatieglas"], "parts": ["Beglazing"]}, {"id": "sanitair", "name": "Sanitair", "types": ["Toilet", "Fontein", "Wastafel", "Douche", "Bad"], "parts": ["Toestel", "Aansluiting", "Afvoer", "Kraan"]}, {"id": "installatie", "name": "Installatie", "types": ["Ventilatie", "Elektra", "Verwarming", "Rookmelder", "Groepenkast", "Intercom"], "parts": ["Ventiel", "Bediening", "Afdekraam", "Rookmelder", "Thermostaat"]}, {"id": "keuken", "name": "Keuken", "types": ["Keuken"], "parts": ["Werkblad", "Front", "Kast", "Lade", "Spoelbak", "Kookplaat"]}, {"id": "trap", "name": "Trap", "types": ["Trap"], "parts": ["Trede", "Stootbord", "Trapboom", "Leuning", "Balustrade"]}]};
-let currentObs=null; const $=id=>document.getElementById(id); function esc(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))} function show(id){['start','form','log'].forEach(x=>$(x).classList.toggle('hidden',x!==id)); if(id==='start')renderObservations();} function resetAll(){currentObs=null;$('searchObs').value='';$('extra').value='';show('start');}
-function renderObservations(){let q=$('searchObs').value.toLowerCase();let groups=[...new Set(DATA.observations.map(o=>o.category))];let out='';groups.forEach(g=>{let found=DATA.observations.filter(o=>o.category===g && o.name.toLowerCase().includes(q));if(!found.length)return;out+=`<div style="grid-column:1/-1"><strong>${esc(g)}</strong></div>`;found.forEach(o=>out+=`<button onclick="selectObs('${o.id}')">${esc(o.name)}<span class="small">${o.cardType==='discussie'?'Discussiekaart':'Registratiekaart'}</span></button>`)});$('obsList').innerHTML=out||'<p>Geen waarneming gevonden.</p>'}
-function selectObs(id){currentObs=DATA.observations.find(o=>o.id===id);$('formTitle').textContent=currentObs.name;$('breadcrumbs').innerHTML=`<span class="pill">${currentObs.cardType==='discussie'?'Discussiekaart':'Registratiekaart'}</span>`;renderObjectOptions();$('glassBlock').classList.toggle('hidden',currentObs.id!=='beglazing_beschadigd');show('form');renderOutput()}
-function renderObjectOptions(){ $('object').innerHTML=DATA.objects.map(o=>`<option value="${o.id}">${esc(o.name)}</option>`).join(''); if(currentObs&&currentObs.id==='beglazing_beschadigd') $('object').value='beglazing'; onObjectChange(); }
-function onObjectChange(){let obj=DATA.objects.find(o=>o.id===$('object').value);$('type').innerHTML=obj.types.map(t=>`<option>${esc(t)}</option>`).join('');$('part').innerHTML=obj.parts.map(p=>`<option>${esc(p)}</option>`).join('');$('location').innerHTML=DATA.locations.map(l=>`<option>${esc(l)}</option>`).join(''); if(currentObs&&currentObs.id==='beglazing_beschadigd')$('part').value='Beglazing'; renderOutput()}
-function articleFor(w){return ['deurblad','scharnier','slot','glas','rubber','ventiel','plafondvlak','wandvlak','vloervlak','werkblad','front'].includes((w||'').toLowerCase())?'het':'de'}
-function title(){let obj=DATA.objects.find(o=>o.id===$('object').value)?.name||'';let loc=$('location').value||'';if(currentObs.id==='manco'&&obj==='Installatie'&&$('type').value==='Rookmelder')return `Rookmelder manco - ${loc}`;return `${currentObs.name} - ${obj} - ${loc}`}
-function baseDescription(){let obj=DATA.objects.find(o=>o.id===$('object').value);let objName=obj.name,type=$('type').value,part=$('part').value,loc=$('location').value;let partLower=part.toLowerCase(),typeLower=type.toLowerCase(),locLower=loc.toLowerCase();
- if(currentObs.id==='manco'){if(objName==='Installatie'&&type==='Rookmelder')return `Rookmelder ontbreekt in de ${locLower}.`;return `${part} ontbreekt aan de ${typeLower} in de ${locLower}.`}
- if(currentObs.id==='niet_compleet')return `${part} van de ${typeLower} in de ${locLower} is niet compleet.`;
- if(currentObs.id==='niet_afgemonteerd')return `${objName} in de ${locLower} is niet afgemonteerd.`;
- if(currentObs.id==='sluit_niet_aan'){if(part.toLowerCase()==='ventiel')return `Ventiel sluit niet aan op het plafond in de ${locLower}.`;return `${part} sluit niet aan in de ${locLower}.`}
- if(currentObs.id==='beglazing_beschadigd'){let side=$('glassSide').value.toLowerCase(),edge=$('glassEdge').value==='Ja'?'in de randzone':'buiten de randzone',dist=$('glassDistance').value==='Ja'?'zichtbaar vanaf de gebruikelijke beoordelingsafstand':'niet zichtbaar vanaf de gebruikelijke beoordelingsafstand',weather=$('glassWeather').value.toLowerCase();return `Beschadiging waargenomen aan de beglazing van de ${typeLower} in de ${locLower}. De beschadiging bevindt zich aan de ${side}, ${edge}, is ${dist} en is geconstateerd bij ${weather}.`}
- return `${currentObs.name} waargenomen op ${articleFor(partLower)} ${partLower} van de ${typeLower} in de ${locLower}.`}
-function advice(){if(currentObs.id==='beglazing_beschadigd'){if($('glassWeather').value!=='Diffuus daglicht / bewolkt'||$('glassDistance').value==='Nee')return 'KOMPAS-advies: constatering.';return 'KOMPAS-advies: opleverpunt.'}return 'KOMPAS-advies: opleverpunt.'}
-function reason(){if(currentObs.id!=='beglazing_beschadigd')return '';let lines=['Toetsingskader: visuele beoordeling van meerbladig isolatieglas bij oplevering.','Uitgangspunt: beoordelen op doorzicht, zonder afwijkingen vooraf te markeren, vanaf minimaal 3 meter en bij diffuus daglicht.'];if($('glassWeather').value!=='Diffuus daglicht / bewolkt')lines.push('De waarneming kan worden geregistreerd, maar de omstandigheden beperken de kwalificatie als opleverpunt.');if($('glassDistance').value==='Nee')lines.push('De beschadiging is niet zichtbaar vanaf de gebruikelijke beoordelingsafstand; KOMPAS adviseert kwalificatie als constatering.');if($('glassEdge').value==='Ja')lines.push('De beschadiging bevindt zich in de randzone; dit is relevant voor de beoordeling.');return lines.join('
-')}
-function checkWarning(){$('termWarning').classList.add('hidden'); if(!currentObs)return;let part=$('part').value;if(currentObs.notOn&&currentObs.notOn.includes(part)){$('termWarning').innerHTML=`<strong>Let op vakterm.</strong><br>De waarneming '${esc(currentObs.name)}' past meestal niet bij onderdeel '${esc(part)}'. KOMPAS adviseert hier '${esc(currentObs.suggestIfInvalid)}'.`;$('termWarning').classList.remove('hidden')}}
-function renderOutput(){if(!currentObs)return;checkWarning();let desc=baseDescription();let extra=$('extra').value.trim();if(extra)desc+='
-Aanvullende toelichting inspecteur: '+extra;$('titleOut').textContent=title();$('descOut').textContent=desc;$('adviceOut').textContent=advice();let r=reason();$('reasonBlock').classList.toggle('hidden',!r);$('reasonOut').textContent=r}
-async function copyText(id){try{await navigator.clipboard.writeText($(id).textContent);alert('Gekopieerd.')}catch(e){alert('Kopiëren lukt niet automatisch. Selecteer de tekst handmatig.')}}
-function downloadLog(){let blob=new Blob([$('logText').value||''],{type:'text/plain;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='KOMPAS_logboek.txt';a.click()}
-renderObservations();</script></body></html>
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KOMPAS Praktijkpilot v1.1</title>
+<style>
+body{margin:0;background:#f6f5f1;color:#202124;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{background:#233142;color:#fff;padding:18px 16px}
+h1{margin:0;font-size:22px} p{margin:6px 0 0;color:#d7dde7}
+main{max-width:980px;margin:0 auto;padding:14px}
+.card{background:#fff;border:1px solid #ddd7cb;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}
+button{border:1px solid #cfc7bb;background:#fff;border-radius:12px;padding:12px;font-size:15px;text-align:left;cursor:pointer}
+button:hover{background:#eef3f8} button.active{background:#dfe9f5;border-color:#97b4d3}
+.nav button,.actions button{background:#233142;color:white;border-color:#233142;text-align:center}
+.nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+input,select,textarea{width:100%;font-size:16px;padding:11px;border:1px solid #d7d0c4;border-radius:10px;background:#fff}
+label{display:block;font-weight:650;margin:12px 0 5px}
+.hidden{display:none!important}
+.output{white-space:pre-wrap;background:#f8f8f8;border:1px solid #ddd7cb;border-radius:12px;padding:12px;line-height:1.45}
+.small{display:block;color:#666;font-size:12px;margin-top:4px}
+.group{grid-column:1/-1;font-weight:700;margin-top:6px}
+.warn{background:#fff7df;border-color:#eed28d}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions button.secondary{background:#fff;color:#233142}
+@media(max-width:650px){.grid{grid-template-columns:1fr 1fr}main{padding:8px}}
+</style>
+</head>
+<body>
+<header>
+<h1>KOMPAS Praktijkpilot v1.1</h1>
+<p>Werkende pilot: registratiekaarten + D-001 Beglazing beschadigd</p>
+<div class="nav">
+<button onclick="showStart()">Start</button>
+<button onclick="showLog()">Logboek</button>
+<button onclick="newEntry()">Nieuwe vastlegging</button>
+</div>
+</header>
+<main>
+<section id="start" class="card">
+<h2>Wat heb je waargenomen?</h2>
+<input id="search" placeholder="Zoek waarneming..." oninput="renderObs()">
+<div id="obsList" class="grid" style="margin-top:12px"></div>
+</section>
+
+<section id="form" class="card hidden">
+<h2 id="obsTitle"></h2>
+
+<label>Object</label>
+<select id="object" onchange="objectChanged()"></select>
+
+<label>Type</label>
+<select id="type" onchange="renderOutput()"></select>
+
+<label>Onderdeel</label>
+<select id="part" onchange="renderOutput()"></select>
+
+<label>Locatie</label>
+<select id="location" onchange="renderOutput()"></select>
+
+<div id="glassBlock" class="hidden">
+<h3>D-001 Beglazing beschadigd</h3>
+<label>Aan welke zijde bevindt de beschadiging zich?</label>
+<select id="glassSide" onchange="renderOutput()">
+<option>Binnenzijde</option><option>Buitenzijde</option><option>Spouwzijde</option>
+</select>
+<label>Bevindt de beschadiging zich in de randzone?</label>
+<select id="glassEdge" onchange="renderOutput()">
+<option>Nee</option><option>Ja</option>
+</select>
+<label>Is de beschadiging zichtbaar vanaf de gebruikelijke beoordelingsafstand?</label>
+<select id="glassDistance" onchange="renderOutput()">
+<option>Ja</option><option>Nee</option>
+</select>
+<label>Onder welke omstandigheden is de beschadiging geconstateerd?</label>
+<select id="glassWeather" onchange="renderOutput()">
+<option>Diffuus daglicht / bewolkt</option><option>Direct zonlicht</option><option>Kunstlicht</option>
+</select>
+</div>
+
+<label>Aanvullende toelichting inspecteur</label>
+<textarea id="extra" rows="3" placeholder="Optioneel" oninput="renderOutput()"></textarea>
+
+<div id="warning" class="card warn hidden"></div>
+
+<h3>Titel</h3>
+<div id="titleOut" class="output"></div>
+<h3>Beschrijving</h3>
+<div id="descOut" class="output"></div>
+<h3>Advies</h3>
+<div id="adviceOut" class="output"></div>
+<div id="reasonWrap" class="hidden">
+<h3>KOMPAS-onderbouwing</h3>
+<div id="reasonOut" class="output"></div>
+</div>
+<div class="actions">
+<button onclick="copyEl('titleOut')">Titel kopiëren</button>
+<button onclick="copyEl('descOut')">Beschrijving kopiëren</button>
+<button onclick="copyEl('adviceOut')">Advies kopiëren</button>
+<button class="secondary" onclick="showStart()">Andere waarneming</button>
+</div>
+</section>
+
+<section id="log" class="card hidden">
+<h2>Logboek praktijkpilot</h2>
+<textarea id="logText" rows="10" placeholder="Ontbreekt / tekst loopt niet / keuze toevoegen..."></textarea>
+<div class="actions">
+<button onclick="downloadLog()">Logboek downloaden</button>
+<button class="secondary" onclick="showStart()">Terug</button>
+</div>
+</section>
+</main>
+<script>
+const DATA = {"locations": ["Hal", "Meterkast", "Woonkamer", "Keuken", "Gang", "Toilet", "Badkamer", "Slaapkamer 1", "Slaapkamer 2", "Slaapkamer 3", "Technische ruimte", "Berging", "Balkon", "Galerij", "Gevel", "Buitenruimte voor", "Buitenruimte achter"], "observations": [{"id": "lakbeschadiging", "name": "Lakbeschadiging", "category": "Afwerking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "beschadiging", "name": "Beschadiging", "category": "Beschadiging", "type": "registratie", "advice": "Opleverpunt"}, {"id": "smet", "name": "Smet", "category": "Afwerking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "vervuiling", "name": "Vervuiling", "category": "Afwerking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "schrale_dekking", "name": "Schrale dekking", "category": "Afwerking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "oneffenheid", "name": "Oneffenheid", "category": "Afwerking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "gat", "name": "Gat", "category": "Materiaal", "type": "registratie", "advice": "Opleverpunt"}, {"id": "scheur", "name": "Scheur", "category": "Materiaal", "type": "registratie", "advice": "Opleverpunt"}, {"id": "barst", "name": "Barst", "category": "Materiaal", "type": "registratie", "advice": "Opleverpunt"}, {"id": "manco", "name": "Manco", "category": "Montage", "type": "registratie", "advice": "Opleverpunt"}, {"id": "niet_compleet", "name": "Niet compleet", "category": "Montage", "type": "registratie", "advice": "Opleverpunt"}, {"id": "niet_afgemonteerd", "name": "Niet afgemonteerd", "category": "Montage", "type": "registratie", "advice": "Opleverpunt"}, {"id": "los_onderdeel", "name": "Los onderdeel", "category": "Montage", "type": "registratie", "advice": "Opleverpunt"}, {"id": "sluit_niet_aan", "name": "Sluit niet aan", "category": "Montage", "type": "registratie", "advice": "Opleverpunt"}, {"id": "open_voeg", "name": "Open voeg", "category": "Afdichting", "type": "registratie", "advice": "Opleverpunt"}, {"id": "kitonderbreking", "name": "Kitonderbreking", "category": "Afdichting", "type": "registratie", "advice": "Opleverpunt"}, {"id": "werkt_niet", "name": "Werkt niet", "category": "Werking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "sluit_niet", "name": "Sluit niet", "category": "Werking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "loopt_aan", "name": "Loopt aan", "category": "Werking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "klemt", "name": "Klemt", "category": "Werking", "type": "registratie", "advice": "Opleverpunt"}, {"id": "beglazing_beschadigd", "name": "Beglazing beschadigd", "category": "Discussiekaart", "type": "discussie", "advice": "KOMPAS-inschatting"}], "objects": [{"id": "deur", "name": "Deur", "types": ["Binnendeur", "Buitendeur"], "parts": ["Deurblad", "Scharnier", "Deurbeslag", "Slot", "Cilinder", "Rubber", "Beglazing"]}, {"id": "kozijn", "name": "Kozijn", "types": ["Stalen montagekozijn", "Houten kozijn", "Kunststof kozijn", "Aluminium kozijn"], "parts": ["Bovenstijl", "Zijstijl links", "Zijstijl rechts", "Onderdorpel", "Aansluiting", "Rubber", "Beslag"]}, {"id": "wand", "name": "Wand", "types": ["Wand"], "parts": ["Wandvlak", "Binnenhoek", "Buitenhoek", "Aansluiting plafond", "Aansluiting vloer"]}, {"id": "plafond", "name": "Plafond", "types": ["Spackwerk", "Spuitwerk"], "parts": ["Plafondvlak", "Aansluiting wand", "Sparing"]}, {"id": "vloer", "name": "Vloer", "types": ["Dekvloer", "Afgewerkte vloer"], "parts": ["Vloervlak", "Aansluiting dorpel", "Aansluiting wand"]}, {"id": "tegelwerk", "name": "Tegelwerk", "types": ["Wandtegelwerk", "Vloertegelwerk"], "parts": ["Tegel", "Voeg", "Kitvoeg", "Inwendige hoek", "Uitwendige hoek", "Aansluiting drain"]}, {"id": "beglazing", "name": "Beglazing", "types": ["Meerbladig isolatieglas"], "parts": ["Beglazing"]}, {"id": "sanitair", "name": "Sanitair", "types": ["Toilet", "Fontein", "Wastafel", "Douche", "Bad"], "parts": ["Toestel", "Aansluiting", "Afvoer", "Kraan"]}, {"id": "installatie", "name": "Installatie", "types": ["Ventilatie", "Rookmelder", "Elektra", "Verwarming", "Groepenkast", "Intercom"], "parts": ["Ventiel", "Rookmelder", "Bediening", "Afdekraam", "Thermostaat"]}, {"id": "keuken", "name": "Keuken", "types": ["Keuken"], "parts": ["Werkblad", "Front", "Kast", "Lade", "Spoelbak", "Kookplaat"]}, {"id": "trap", "name": "Trap", "types": ["Trap"], "parts": ["Trede", "Stootbord", "Trapboom", "Leuning", "Balustrade"]}]};
+let currentObs = null;
+const el = id => document.getElementById(id);
+
+function showStart() {
+  el('start').classList.remove('hidden');
+  el('form').classList.add('hidden');
+  el('log').classList.add('hidden');
+  renderObs();
+}
+function showLog() {
+  el('start').classList.add('hidden');
+  el('form').classList.add('hidden');
+  el('log').classList.remove('hidden');
+}
+function newEntry() {
+  currentObs = null;
+  el('search').value = '';
+  el('extra').value = '';
+  showStart();
+}
+function renderObs() {
+  const q = el('search').value.toLowerCase();
+  const cats = [...new Set(DATA.observations.map(o => o.category))];
+  let html = '';
+  cats.forEach(cat => {
+    const items = DATA.observations.filter(o => o.category === cat && o.name.toLowerCase().includes(q));
+    if (!items.length) return;
+    html += `<div class="group">${cat}</div>`;
+    items.forEach(o => {
+      html += `<button onclick="selectObs('${o.id}')">${o.name}<span class="small">${o.type === 'discussie' ? 'Discussiekaart' : 'Registratiekaart'}</span></button>`;
+    });
+  });
+  el('obsList').innerHTML = html || '<p>Geen waarneming gevonden.</p>';
+}
+function selectObs(id) {
+  currentObs = DATA.observations.find(o => o.id === id);
+  el('obsTitle').textContent = currentObs.name;
+  fillObjects();
+  el('glassBlock').classList.toggle('hidden', currentObs.id !== 'beglazing_beschadigd');
+  if (currentObs.id === 'beglazing_beschadigd') {
+    el('object').value = 'beglazing';
+    objectChanged();
+  }
+  el('start').classList.add('hidden');
+  el('form').classList.remove('hidden');
+  el('log').classList.add('hidden');
+  renderOutput();
+}
+function fillObjects() {
+  el('object').innerHTML = DATA.objects.map(o => `<option value="${o.id}">${o.name}</option>`).join('');
+  objectChanged();
+}
+function objectChanged() {
+  const obj = DATA.objects.find(o => o.id === el('object').value);
+  el('type').innerHTML = obj.types.map(t => `<option>${t}</option>`).join('');
+  el('part').innerHTML = obj.parts.map(p => `<option>${p}</option>`).join('');
+  if (currentObs && currentObs.id === 'beglazing_beschadigd') {
+    el('part').value = 'Beglazing';
+  }
+  el('location').innerHTML = DATA.locations.map(l => `<option>${l}</option>`).join('');
+  renderOutput();
+}
+function lid(word) {
+  const w = (word || '').toLowerCase();
+  const het = ['deurblad','scharnier','slot','glas','rubber','plafondvlak','wandvlak','vloervlak','werkblad','front','ventiel'];
+  return het.includes(w) ? 'het' : 'de';
+}
+function titel() {
+  const obj = DATA.objects.find(o => o.id === el('object').value).name;
+  const loc = el('location').value;
+  return `${currentObs.name} - ${obj} - ${loc}`;
+}
+function beschrijving() {
+  const obj = DATA.objects.find(o => o.id === el('object').value);
+  const type = el('type').value.toLowerCase();
+  const part = el('part').value.toLowerCase();
+  const loc = el('location').value.toLowerCase();
+
+  if (currentObs.id === 'manco') return `${el('part').value} ontbreekt aan de ${type} in de ${loc}.`;
+  if (currentObs.id === 'niet_compleet') return `${el('part').value} van de ${type} in de ${loc} is niet compleet.`;
+  if (currentObs.id === 'niet_afgemonteerd') return `${obj.name} in de ${loc} is niet afgemonteerd.`;
+  if (currentObs.id === 'sluit_niet_aan') {
+    if (el('part').value === 'Ventiel') return `Ventiel sluit niet aan op het plafond in de ${loc}.`;
+    return `${el('part').value} sluit niet aan in de ${loc}.`;
+  }
+  if (currentObs.id === 'beglazing_beschadigd') {
+    const side = el('glassSide').value.toLowerCase();
+    const edge = el('glassEdge').value === 'Ja' ? 'in de randzone' : 'buiten de randzone';
+    const dist = el('glassDistance').value === 'Ja' ? 'zichtbaar vanaf de gebruikelijke beoordelingsafstand' : 'niet zichtbaar vanaf de gebruikelijke beoordelingsafstand';
+    const weather = el('glassWeather').value.toLowerCase();
+    return `Beschadiging waargenomen aan de beglazing van de ${type} in de ${loc}. De beschadiging bevindt zich aan de ${side}, ${edge}, is ${dist} en is geconstateerd bij ${weather}.`;
+  }
+  return `${currentObs.name} waargenomen op ${lid(part)} ${part} van de ${type} in de ${loc}.`;
+}
+function advies() {
+  if (currentObs.id === 'beglazing_beschadigd') {
+    if (el('glassWeather').value !== 'Diffuus daglicht / bewolkt') return 'KOMPAS-advies: constatering.';
+    if (el('glassDistance').value === 'Nee') return 'KOMPAS-advies: constatering.';
+    return 'KOMPAS-advies: opleverpunt.';
+  }
+  return 'KOMPAS-advies: opleverpunt.';
+}
+function onderbouwing() {
+  if (!currentObs || currentObs.id !== 'beglazing_beschadigd') return '';
+  const lines = [];
+  lines.push('Toetsingskader: beoordeling van meerbladig isolatieglas bij oplevering.');
+  lines.push('Beoordelingsuitgangspunt: beoordeling op doorzicht, vanaf minimaal 3 meter, zo loodrecht mogelijk op het glas en bij diffuus daglicht.');
+  if (el('glassWeather').value !== 'Diffuus daglicht / bewolkt') lines.push('De omstandigheden wijken af van de gebruikelijke beoordelingsmethode. De waarneming wordt wel geregistreerd, maar KOMPAS adviseert terughoudendheid bij kwalificatie als opleverpunt.');
+  if (el('glassDistance').value === 'Nee') lines.push('De beschadiging is niet zichtbaar vanaf de gebruikelijke beoordelingsafstand. KOMPAS adviseert deze waarneming als constatering vast te leggen.');
+  if (el('glassEdge').value === 'Ja') lines.push('De beschadiging bevindt zich in de randzone; dit is relevant voor de beoordeling.');
+  return lines.join('\n');
+}
+function checkWarning() {
+  el('warning').classList.add('hidden');
+  if (!currentObs) return;
+  const part = el('part').value;
+  const wrongParts = ['Scharnier','Deurbeslag','Slot','Cilinder','Rubber','Beglazing'];
+  if (currentObs.id === 'lakbeschadiging' && wrongParts.includes(part)) {
+    el('warning').innerHTML = '<strong>Let op vakterm.</strong><br>Lakbeschadiging past meestal niet bij dit onderdeel. Gebruik hier waarschijnlijk <strong>Beschadiging</strong>.';
+    el('warning').classList.remove('hidden');
+  }
+}
+function renderOutput() {
+  if (!currentObs) return;
+  checkWarning();
+  let desc = beschrijving();
+  const extra = el('extra').value.trim();
+  if (extra) desc += '\nAanvullende toelichting inspecteur: ' + extra;
+  el('titleOut').textContent = titel();
+  el('descOut').textContent = desc;
+  el('adviceOut').textContent = advies();
+  const r = onderbouwing();
+  el('reasonWrap').classList.toggle('hidden', !r);
+  el('reasonOut').textContent = r;
+}
+function copyEl(id) {
+  navigator.clipboard.writeText(el(id).textContent).then(() => alert('Gekopieerd.'));
+}
+function downloadLog() {
+  const blob = new Blob([el('logText').value], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'KOMPAS_logboek.txt';
+  a.click();
+}
+renderObs();
+</script>
+</body>
+</html>

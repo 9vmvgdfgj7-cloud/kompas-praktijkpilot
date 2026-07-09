@@ -1,3 +1,3 @@
-KOMPAS Praktijkpilot v1.0
+# KOMPAS Praktijkpilot v1.1
 
-Open index.html om te testen.
+Werkende praktijkpilot. Upload index.html naar GitHub om v1.0 te vervangen.
