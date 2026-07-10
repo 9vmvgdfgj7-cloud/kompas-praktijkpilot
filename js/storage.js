@@ -1,1 +1,0 @@
-window.KompasStorage={getLog(){return localStorage.getItem("kompas-logbook")||""},setLog(v){localStorage.setItem("kompas-logbook",v||"")}};
