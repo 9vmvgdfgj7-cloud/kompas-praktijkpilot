@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="nl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KOMPAS Praktijkpilot</title>
-<link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#233142">
+  <title>KOMPAS Core v2</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<header>
-  <h1 id="versionTitle">KOMPAS Praktijkpilot</h1>
-  <p>Registratiekaarten + discussiekaart beglazing</p>
+<header class="app-header">
+  <div>
+    <h1 id="versionTitle">KOMPAS Core v2</h1>
+    <p id="versionSubtitle"></p>
+  </div>
   <nav>
     <button id="navStart">Start</button>
     <button id="navDevelopment">Ontwikkellijst</button>
@@ -19,106 +22,154 @@
 </header>
 
 <main>
-<section id="start" class="card">
-  <h2>Wat heb je waargenomen?</h2>
-  <input id="search" placeholder="Zoek waarneming...">
-  <div id="obsList" class="grid"></div>
-</section>
+  <section id="start" class="panel">
+    <h2>Wat heb je waargenomen?</h2>
+    <input id="search" type="search" placeholder="Zoek waarneming..." autocomplete="off">
+    <div id="obsList" class="choice-grid"></div>
+  </section>
 
-<section id="form" class="card hidden">
-  <h2 id="obsTitle"></h2>
-  <div id="cardType" class="pill"></div>
+  <section id="form" class="panel hidden">
+    <div class="section-title-row">
+      <div>
+        <h2 id="obsTitle"></h2>
+        <span id="cardType" class="pill"></span>
+      </div>
+      <button id="backToStart" class="button light">Alle waarnemingen</button>
+    </div>
 
-  <label>Object</label><select id="object"></select>
-  <label>Type</label><select id="type"></select>
-  <label>Onderdeel</label><select id="part"></select>
-  <label>Locatie</label><select id="location"></select>
+    <div class="form-grid">
+      <div>
+        <label for="object">Object</label>
+        <select id="object"></select>
+      </div>
+      <div>
+        <label for="type">Type</label>
+        <select id="type"></select>
+      </div>
+      <div>
+        <label for="part">Onderdeel</label>
+        <select id="part"></select>
+      </div>
+      <div>
+        <label for="location">Locatie</label>
+        <select id="location"></select>
+      </div>
+    </div>
 
-  <div id="glassBlock" class="hidden">
-    <h3>D-001 Beglazing beschadigd</h3>
-    <div class="note warn">Deze testkaart beoordeelt een lijnvormige beschadiging/kras in meerbladig isolatieglas.</div>
+    <div id="glassBlock" class="discussion-block hidden">
+      <h3>D-001 Beglazing beschadigd</h3>
+      <div class="notice warn">
+        Beoordeling van een lijnvormige beschadiging aan meerbladig isolatieglas.
+      </div>
 
-    <label>Aan welke zijde bevindt de beschadiging zich?</label>
-    <select id="glassSide">
-      <option>Binnenzijde</option>
-      <option>Buitenzijde</option>
-      <option>Spouwzijde</option>
-    </select>
+      <div class="form-grid">
+        <div>
+          <label for="glassSide">Zijde beschadiging</label>
+          <select id="glassSide">
+            <option>Binnenzijde</option>
+            <option>Buitenzijde</option>
+            <option>Spouwzijde</option>
+          </select>
+        </div>
+        <div>
+          <label for="glassZone">Zone</label>
+          <select id="glassZone">
+            <option value="R">Zone R – eerste 15 mm / normaal afgedekt</option>
+            <option value="E">Zone E – 50 mm aansluitend op zone R</option>
+            <option value="M" selected>Zone M – hoofdzone</option>
+          </select>
+        </div>
+        <div>
+          <label for="glassLength">Lengte beschadiging (mm)</label>
+          <input id="glassLength" type="number" min="0" step="1" value="16">
+        </div>
+        <div>
+          <label for="glassDistance">Zichtbaar vanaf minimaal 3 meter?</label>
+          <select id="glassDistance">
+            <option>Ja</option>
+            <option>Nee</option>
+          </select>
+        </div>
+        <div>
+          <label for="glassWeather">Omstandigheden</label>
+          <select id="glassWeather">
+            <option>Diffuus daglicht / bewolkt</option>
+            <option>Direct zonlicht</option>
+            <option>Kunstlicht</option>
+          </select>
+        </div>
+      </div>
 
-    <label>In welke zone bevindt de beschadiging zich?</label>
-    <select id="glassZone">
-      <option value="R">Zone R – eerste 15 mm / normaal afgedekt</option>
-      <option value="E">Zone E – 50 mm aansluitend op zone R</option>
-      <option value="M" selected>Zone M – hoofdzone</option>
-    </select>
+      <div id="normResult" class="notice"></div>
+    </div>
 
-    <label>Gemeten lengte van de beschadiging (mm)</label>
-    <input id="glassLength" type="number" min="0" step="1" value="16">
+    <label for="extra">Aanvullende toelichting inspecteur</label>
+    <textarea id="extra" rows="3" placeholder="Optioneel"></textarea>
 
-    <label>Is de beschadiging zichtbaar vanaf minimaal 3 meter?</label>
-    <select id="glassDistance">
-      <option>Ja</option>
-      <option>Nee</option>
-    </select>
+    <div id="warning" class="notice warn hidden"></div>
 
-    <label>Onder welke omstandigheden is de beschadiging geconstateerd?</label>
-    <select id="glassWeather">
-      <option>Diffuus daglicht / bewolkt</option>
-      <option>Direct zonlicht</option>
-      <option>Kunstlicht</option>
-    </select>
+    <div class="output-group">
+      <h3>Titel</h3>
+      <div id="titleOut" class="output"></div>
+      <button class="button" data-copy="titleOut">Titel kopiëren</button>
+    </div>
 
-    <div id="normResult" class="note"></div>
-  </div>
+    <div class="output-group">
+      <h3>Beschrijving</h3>
+      <div id="descOut" class="output"></div>
+      <button class="button" data-copy="descOut">Beschrijving kopiëren</button>
+    </div>
 
-  <label>Aanvullende toelichting inspecteur</label>
-  <textarea id="extra" rows="3" placeholder="Optioneel"></textarea>
+    <div class="output-group">
+      <h3>Advies</h3>
+      <div id="adviceOut" class="output"></div>
+      <button class="button" data-copy="adviceOut">Advies kopiëren</button>
+    </div>
 
-  <div id="warning" class="note warn hidden"></div>
+    <div id="reasonWrap" class="output-group hidden">
+      <h3>KOMPAS-onderbouwing</h3>
+      <div id="reasonOut" class="output"></div>
+    </div>
 
-  <h3>Titel</h3>
-  <div id="titleOut" class="output"></div>
+    <div class="action-row">
+      <button id="quickLog" class="button secondary">Aan KOMPAS toevoegen</button>
+      <button id="otherObservation" class="button light">Andere waarneming</button>
+    </div>
+  </section>
 
-  <h3>Beschrijving</h3>
-  <div id="descOut" class="output"></div>
+  <section id="development" class="panel hidden">
+    <h2>KOMPAS Ontwikkellijst</h2>
+    <p>Relevante opleverbare afbouwonderdelen voor de praktijkpilot.</p>
+    <table>
+      <thead>
+        <tr><th>Onderdeel</th><th>Status</th></tr>
+      </thead>
+      <tbody id="developmentRows"></tbody>
+    </table>
+  </section>
 
-  <h3>Advies</h3>
-  <div id="adviceOut" class="output"></div>
+  <section id="log" class="panel hidden">
+    <h2>KOMPAS Logboek</h2>
+    <p>Verbeterpunten worden met de actuele selectie opgeslagen.</p>
+    <textarea id="logText" rows="16" placeholder="Nog geen verbeterpunten toegevoegd."></textarea>
+    <div class="action-row">
+      <button id="downloadLog" class="button">Logboek downloaden</button>
+      <button id="clearLog" class="button light">Logboek wissen</button>
+      <button id="backStart" class="button light">Terug</button>
+    </div>
+  </section>
 
-  <div id="reasonWrap" class="hidden">
-    <h3>KOMPAS-onderbouwing</h3>
-    <div id="reasonOut" class="output"></div>
-  </div>
-
-  <div class="actions">
-    <button data-copy="titleOut">Titel kopiëren</button>
-    <button data-copy="descOut">Beschrijving kopiëren</button>
-    <button data-copy="adviceOut">Advies kopiëren</button>
-    <button id="quickLog">Aan KOMPAS toevoegen</button>
-    <button class="secondary" id="otherObservation">Andere waarneming</button>
-  </div>
-</section>
-
-<section id="development" class="card hidden">
-  <h2>KOMPAS Ontwikkellijst</h2>
-  <p>Relevante opleverbare afbouwonderdelen voor de praktijkpilot.</p>
-  <table>
-    <thead><tr><th>Onderdeel</th><th>Status</th></tr></thead>
-    <tbody id="developmentRows"></tbody>
-  </table>
-</section>
-
-<section id="log" class="card hidden">
-  <h2>KOMPAS Logboek</h2>
-  <textarea id="logText" rows="14" placeholder="Verbeterpunten verschijnen hier."></textarea>
-  <div class="actions">
-    <button id="downloadLog">Logboek downloaden</button>
-    <button class="secondary" id="backStart">Terug</button>
-  </div>
-</section>
+  <section id="error" class="panel hidden">
+    <h2>Gegevens konden niet worden geladen</h2>
+    <p id="errorText"></p>
+  </section>
 </main>
 
+<script src="js/storage.js"></script>
+<script src="js/registry.js"></script>
 <script src="js/discussion-glass.js"></script>
+<script src="js/stabu.js"></script>
+<script src="js/logbook.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

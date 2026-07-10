@@ -29,7 +29,13 @@ window.KompasGlass = {
     const visibility = distance === "Ja"
       ? "zichtbaar vanaf minimaal 3 meter"
       : "niet zichtbaar vanaf minimaal 3 meter";
-    return `Beschadiging waargenomen aan de beglazing van de ${type.toLowerCase()} in ${location.toLowerCase()}. De beschadiging bevindt zich aan de ${side.toLowerCase()}, in zone ${zone}, is ${visibility} en is geconstateerd bij ${weather.toLowerCase()}. De gemeten lengte bedraagt ${Number(lengthMm || 0)} mm. ${norm.text}`;
+
+    return [
+      `Beschadiging waargenomen aan de beglazing van de ${type.toLowerCase()} in ${location.toLowerCase()}.`,
+      `De beschadiging bevindt zich aan de ${side.toLowerCase()}, in zone ${zone}, is ${visibility} en is geconstateerd bij ${weather.toLowerCase()}.`,
+      `De gemeten lengte bedraagt ${Number(lengthMm || 0)} mm.`,
+      norm.text
+    ].join(" ");
   },
 
   reasoning({ zone, lengthMm, distance, weather }) {
@@ -39,6 +45,7 @@ window.KompasGlass = {
       "Beoordeling op doorzicht, zonder vooraf markeren, vanaf minimaal 3 meter, zo loodrecht mogelijk en bij diffuus daglicht.",
       norm.text
     ];
+
     if (weather !== "Diffuus daglicht / bewolkt") {
       lines.push("De lichtomstandigheden wijken af van de beoordelingsmethode. De waarneming blijft geldig, maar KOMPAS adviseert daarom kwalificatie als constatering.");
     }

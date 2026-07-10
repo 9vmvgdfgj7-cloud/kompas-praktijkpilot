@@ -1,0 +1,225 @@
+[
+  {
+    "id": "deur",
+    "name": "Deur",
+    "types": [
+      "Binnendeur",
+      "Buitendeur"
+    ],
+    "parts": [
+      "Deurblad",
+      "Scharnier",
+      "Deurbeslag",
+      "Slot",
+      "Cilinder",
+      "Rubber",
+      "Beglazing"
+    ]
+  },
+  {
+    "id": "kozijn",
+    "name": "Kozijn",
+    "types": [
+      "Stalen montagekozijn",
+      "Houten kozijn",
+      "Kunststof kozijn",
+      "Aluminium kozijn"
+    ],
+    "parts": [
+      "Bovenstijl",
+      "Zijstijl links",
+      "Zijstijl rechts",
+      "Onderdorpel",
+      "Aansluiting",
+      "Rubber",
+      "Beslag"
+    ]
+  },
+  {
+    "id": "wand",
+    "name": "Wand",
+    "types": [
+      "Wand"
+    ],
+    "parts": [
+      "Wandvlak",
+      "Binnenhoek",
+      "Buitenhoek",
+      "Aansluiting plafond",
+      "Aansluiting vloer"
+    ]
+  },
+  {
+    "id": "plafond",
+    "name": "Plafond",
+    "types": [
+      "Spackwerk",
+      "Spuitwerk"
+    ],
+    "parts": [
+      "Plafondvlak",
+      "Aansluiting wand",
+      "Sparing"
+    ]
+  },
+  {
+    "id": "vloer",
+    "name": "Vloer",
+    "types": [
+      "Dekvloer",
+      "Afgewerkte vloer"
+    ],
+    "parts": [
+      "Vloervlak",
+      "Aansluiting dorpel",
+      "Aansluiting wand"
+    ]
+  },
+  {
+    "id": "tegelwerk",
+    "name": "Tegelwerk",
+    "types": [
+      "Wandtegelwerk",
+      "Vloertegelwerk"
+    ],
+    "parts": [
+      "Tegel",
+      "Voeg",
+      "Kitvoeg",
+      "Inwendige hoek",
+      "Uitwendige hoek",
+      "Aansluiting drain"
+    ]
+  },
+  {
+    "id": "beglazing",
+    "name": "Beglazing",
+    "types": [
+      "Meerbladig isolatieglas"
+    ],
+    "parts": [
+      "Beglazing"
+    ]
+  },
+  {
+    "id": "sanitair",
+    "name": "Sanitair",
+    "types": [
+      "Toilet",
+      "Fontein",
+      "Wastafel",
+      "Douche",
+      "Bad"
+    ],
+    "parts": [
+      "Toestel",
+      "Aansluiting",
+      "Afvoer",
+      "Kraan"
+    ]
+  },
+  {
+    "id": "installatie",
+    "name": "Installatie",
+    "types": [
+      "Ventilatie",
+      "Rookmelder",
+      "WTW-unit",
+      "Warmtepomp",
+      "Omvormer zonnepanelen",
+      "Elektra",
+      "Verwarming",
+      "Groepenkast",
+      "Intercom"
+    ],
+    "partsByType": {
+      "Ventilatie": [
+        "Ventiel",
+        "Bediening",
+        "Kanaalaansluiting"
+      ],
+      "Rookmelder": [
+        "Rookmelder",
+        "Montagevoet"
+      ],
+      "WTW-unit": [
+        "Behuizing",
+        "Bediening",
+        "Filterdeksel",
+        "Condensaansluiting",
+        "Kanaalaansluiting",
+        "Ophanging"
+      ],
+      "Warmtepomp": [
+        "Binnenunit",
+        "Buitenunit",
+        "Behuizing",
+        "Display",
+        "Leidingen",
+        "Isolatie",
+        "Condensafvoer",
+        "Aansluiting"
+      ],
+      "Omvormer zonnepanelen": [
+        "Behuizing",
+        "Display",
+        "Bekabeling",
+        "Aansluiting",
+        "Montagebeugel"
+      ],
+      "Elektra": [
+        "Afdekraam",
+        "Wandcontactdoos",
+        "Schakelaar",
+        "Bekabeling"
+      ],
+      "Verwarming": [
+        "Thermostaat",
+        "Radiator",
+        "Vloerverwarming",
+        "Aansluiting"
+      ],
+      "Groepenkast": [
+        "Afdekplaat",
+        "Automaat",
+        "Aardlekschakelaar",
+        "Hoofdschakelaar",
+        "Label"
+      ],
+      "Intercom": [
+        "Binnenpost",
+        "Behuizing",
+        "Bediening"
+      ]
+    }
+  },
+  {
+    "id": "keuken",
+    "name": "Keuken",
+    "types": [
+      "Keuken"
+    ],
+    "parts": [
+      "Werkblad",
+      "Front",
+      "Kast",
+      "Lade",
+      "Spoelbak",
+      "Kookplaat"
+    ]
+  },
+  {
+    "id": "trap",
+    "name": "Trap",
+    "types": [
+      "Trap"
+    ],
+    "parts": [
+      "Trede",
+      "Stootbord",
+      "Trapboom",
+      "Leuning",
+      "Balustrade"
+    ]
+  }
+]

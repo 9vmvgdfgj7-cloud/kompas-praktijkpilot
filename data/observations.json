@@ -1,0 +1,149 @@
+[
+  {
+    "id": "lakbeschadiging",
+    "name": "Lakbeschadiging",
+    "category": "Afwerking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "beschadiging",
+    "name": "Beschadiging",
+    "category": "Beschadiging",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "smet",
+    "name": "Smet",
+    "category": "Afwerking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "vervuiling",
+    "name": "Vervuiling",
+    "category": "Afwerking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "schrale_dekking",
+    "name": "Schrale dekking",
+    "category": "Afwerking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "oneffenheid",
+    "name": "Oneffenheid",
+    "category": "Afwerking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "gat",
+    "name": "Gat",
+    "category": "Materiaal",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "scheur",
+    "name": "Scheur",
+    "category": "Materiaal",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "barst",
+    "name": "Barst",
+    "category": "Materiaal",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "manco",
+    "name": "Manco",
+    "category": "Montage",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "niet_compleet",
+    "name": "Niet compleet",
+    "category": "Montage",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "niet_afgemonteerd",
+    "name": "Niet afgemonteerd",
+    "category": "Montage",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "los_onderdeel",
+    "name": "Los onderdeel",
+    "category": "Montage",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "sluit_niet_aan",
+    "name": "Sluit niet aan",
+    "category": "Montage",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "open_voeg",
+    "name": "Open voeg",
+    "category": "Afdichting",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "kitonderbreking",
+    "name": "Kitonderbreking",
+    "category": "Afdichting",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "werkt_niet",
+    "name": "Werkt niet",
+    "category": "Werking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "sluit_niet",
+    "name": "Sluit niet",
+    "category": "Werking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "loopt_aan",
+    "name": "Loopt aan",
+    "category": "Werking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "klemt",
+    "name": "Klemt",
+    "category": "Werking",
+    "cardType": "registration",
+    "defaultAdvice": "Opleverpunt"
+  },
+  {
+    "id": "beglazing_beschadigd",
+    "name": "Beglazing beschadigd",
+    "category": "Discussiekaart",
+    "cardType": "discussion",
+    "defaultAdvice": "KOMPAS-inschatting"
+  }
+]

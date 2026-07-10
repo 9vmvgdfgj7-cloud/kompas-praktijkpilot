@@ -1,22 +1,44 @@
-# KOMPAS Praktijkpilot v1.2
+# KOMPAS Core v2.0
 
-Volledige GitHub-projectstructuur.
+Volledige GitHub-projectstructuur voor de KOMPAS-praktijkpilot.
 
-## Bestanden
+## Structuur
 - `index.html`
 - `css/styles.css`
 - `js/app.js`
+- `js/registry.js`
 - `js/discussion-glass.js`
-- `data/kompas-data.json`
+- `js/logbook.js`
+- `js/storage.js`
+- `js/stabu.js`
+- `data/meta.json`
+- `data/observations.json`
+- `data/objects.json`
+- `data/locations.json`
+- `data/development.json`
 
-## In deze versie
+## Functionaliteit
+- Registratiekaarten voor veelvoorkomende waarnemingen.
 - Titel begint met `Opleverpunt` of `Constatering`.
-- Lidwoord voor locaties verwijderd.
-- Installaties uitgebreid met WTW-unit, warmtepomp en omvormer zonnepanelen.
+- Locaties zonder overbodig lidwoord in de beschrijving.
+- Installatietypen: WTW-unit, warmtepomp en omvormer zonnepanelen.
 - Onderdelen per installatietype.
+- Discussiekaart voor beschadigde beglazing:
+  - zijde;
+  - zone R/E/M;
+  - gemeten lengte;
+  - vergelijking met grens per zone;
+  - kijkafstand;
+  - lichtomstandigheden;
+  - advies en onderbouwing.
 - Knop `Aan KOMPAS toevoegen`.
-- Ontwikkellijst met relevante afbouwonderdelen.
-- Uitgebreide discussiekaart beglazing met zone, lengte, kijkafstand en omstandigheden.
+- Lokaal bewaard logboek.
+- Ontwikkellijst voor relevante opleverbare afbouwonderdelen.
 
 ## GitHub Desktop
-Vervang de inhoud van je lokale repository door deze projectmap, commit en push.
+1. Pak de ZIP uit.
+2. Open in GitHub Desktop `Show in Finder`.
+3. Verwijder daar de oude projectbestanden, maar laat de verborgen `.git`-map staan.
+4. Kopieer alle bestanden en mappen uit `kompas-core-v2` naar die geopende repositorymap.
+5. Ga terug naar GitHub Desktop.
+6. Commit en Push.
