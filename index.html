@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#233142">
-  <title>KOMPAS Core v2</title>
+  <title>KOMPAS Core v2.1</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header class="app-header">
   <div>
-    <h1 id="versionTitle">KOMPAS Core v2</h1>
+    <h1 id="versionTitle">KOMPAS Core</h1>
     <p id="versionSubtitle"></p>
   </div>
   <nav>
@@ -37,7 +37,7 @@
       <button id="backToStart" class="button light">Alle waarnemingen</button>
     </div>
 
-    <div class="form-grid">
+    <div id="standardContext" class="form-grid">
       <div>
         <label for="object">Object</label>
         <select id="object"></select>
@@ -56,51 +56,91 @@
       </div>
     </div>
 
-    <div id="glassBlock" class="discussion-block hidden">
-      <h3>D-001 Beglazing beschadigd</h3>
-      <div class="notice warn">
-        Beoordeling van een lijnvormige beschadiging aan meerbladig isolatieglas.
-      </div>
-
+    <div id="glassBlock" class="expert-block hidden">
+      <h3>E-001 Beschadiging isolatieglas</h3>
+      <div class="notice warn">Beoordeling van een lijnvormige beschadiging aan isolatieglas.</div>
       <div class="form-grid">
-        <div>
-          <label for="glassSide">Zijde beschadiging</label>
-          <select id="glassSide">
-            <option>Binnenzijde</option>
-            <option>Buitenzijde</option>
-            <option>Spouwzijde</option>
-          </select>
+        <div><label for="glassSide">Zijde beschadiging</label>
+          <select id="glassSide"><option>Binnenzijde</option><option>Buitenzijde</option><option>Spouw</option></select>
         </div>
-        <div>
-          <label for="glassZone">Zone</label>
+        <div><label for="glassZone">Zone</label>
           <select id="glassZone">
             <option value="R">Zone R – eerste 15 mm / normaal afgedekt</option>
             <option value="E">Zone E – 50 mm aansluitend op zone R</option>
             <option value="M" selected>Zone M – hoofdzone</option>
           </select>
         </div>
-        <div>
-          <label for="glassLength">Lengte beschadiging (mm)</label>
+        <div><label for="glassLength">Lengte beschadiging (mm)</label>
           <input id="glassLength" type="number" min="0" step="1" value="16">
         </div>
+        <div><label for="glassDistance">Zichtbaar vanaf minimaal 3 meter?</label>
+          <select id="glassDistance"><option>Ja</option><option>Nee</option></select>
+        </div>
+        <div><label for="glassWeather">Omstandigheden</label>
+          <select id="glassWeather"><option>Diffuus daglicht / bewolkt</option><option>Direct zonlicht</option><option>Kunstlicht</option></select>
+        </div>
+      </div>
+      <div id="glassNormResult" class="notice"></div>
+    </div>
+
+    <div id="tileBlock" class="expert-block hidden">
+      <h3>E-002 Hol klinkende tegel</h3>
+      <div class="notice warn">Een afwijkend, hol klinkend geluid is een waarneming. De kwalificatie volgt op basis van bijkomende verschijnselen.</div>
+      <div class="form-grid">
         <div>
-          <label for="glassDistance">Zichtbaar vanaf minimaal 3 meter?</label>
-          <select id="glassDistance">
-            <option>Ja</option>
-            <option>Nee</option>
-          </select>
+          <label for="tileKind">Tegelwerk</label>
+          <select id="tileKind"><option>Vloertegelwerk</option><option>Wandtegelwerk</option></select>
         </div>
         <div>
-          <label for="glassWeather">Omstandigheden</label>
-          <select id="glassWeather">
-            <option>Diffuus daglicht / bewolkt</option>
-            <option>Direct zonlicht</option>
-            <option>Kunstlicht</option>
-          </select>
+          <label for="tileLocation">Locatie</label>
+          <select id="tileLocation"></select>
+        </div>
+        <div>
+          <label for="tileCount">Aantal afwijkend klinkende tegels</label>
+          <input id="tileCount" type="number" min="1" step="1" value="1">
+        </div>
+        <div>
+          <label for="tileConnected">Aaneengesloten?</label>
+          <select id="tileConnected"><option>Nee</option><option>Ja</option></select>
+        </div>
+        <div>
+          <label for="tileMovement">Beweging waarneembaar?</label>
+          <select id="tileMovement"><option>Nee</option><option>Ja</option></select>
+        </div>
+        <div>
+          <label for="tileLoose">Tegel ligt aantoonbaar los?</label>
+          <select id="tileLoose"><option>Nee</option><option>Ja</option></select>
+        </div>
+        <div>
+          <label for="tileCrack">Scheurvorming aanwezig?</label>
+          <select id="tileCrack"><option>Nee</option><option>Ja</option></select>
+        </div>
+        <div>
+          <label for="tileJointDamage">Voegschade aanwezig?</label>
+          <select id="tileJointDamage"><option>Nee</option><option>Ja</option></select>
+        </div>
+        <div>
+          <label for="tileLevelDifference">Hoogteverschil aanwezig?</label>
+          <select id="tileLevelDifference"><option>Nee</option><option>Ja</option></select>
         </div>
       </div>
 
-      <div id="normResult" class="notice"></div>
+      <div id="tileAssessment" class="notice"></div>
+
+      <details class="knowledge">
+        <summary>Vaktechnische onderbouwing</summary>
+        <div id="tileTechnical"></div>
+      </details>
+
+      <details class="knowledge">
+        <summary>Bron</summary>
+        <div id="tileSource"></div>
+      </details>
+
+      <details class="knowledge">
+        <summary>Waarom deze inschatting?</summary>
+        <div id="tileWhy"></div>
+      </details>
     </div>
 
     <label for="extra">Aanvullende toelichting inspecteur</label>
@@ -139,18 +179,11 @@
 
   <section id="development" class="panel hidden">
     <h2>KOMPAS Ontwikkellijst</h2>
-    <p>Relevante opleverbare afbouwonderdelen voor de praktijkpilot.</p>
-    <table>
-      <thead>
-        <tr><th>Onderdeel</th><th>Status</th></tr>
-      </thead>
-      <tbody id="developmentRows"></tbody>
-    </table>
+    <table><thead><tr><th>Onderdeel</th><th>Status</th></tr></thead><tbody id="developmentRows"></tbody></table>
   </section>
 
   <section id="log" class="panel hidden">
     <h2>KOMPAS Logboek</h2>
-    <p>Verbeterpunten worden met de actuele selectie opgeslagen.</p>
     <textarea id="logText" rows="16" placeholder="Nog geen verbeterpunten toegevoegd."></textarea>
     <div class="action-row">
       <button id="downloadLog" class="button">Logboek downloaden</button>
@@ -158,17 +191,13 @@
       <button id="backStart" class="button light">Terug</button>
     </div>
   </section>
-
-  <section id="error" class="panel hidden">
-    <h2>Gegevens konden niet worden geladen</h2>
-    <p id="errorText"></p>
-  </section>
 </main>
 
+<script src="js/data.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/registry.js"></script>
-<script src="js/discussion-glass.js"></script>
-<script src="js/stabu.js"></script>
+<script src="js/expert-glass.js"></script>
+<script src="js/expert-tile-hollow.js"></script>
 <script src="js/logbook.js"></script>
 <script src="js/app.js"></script>
 </body>

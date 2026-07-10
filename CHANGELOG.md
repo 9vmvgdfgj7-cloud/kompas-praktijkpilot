@@ -1,9 +1,9 @@
 # Changelog
 
-## 2.0
-- Nieuwe modulaire projectstructuur.
-- Registratie- en discussiekaarten gescheiden.
-- Beglazing uitgebreid met zone en normvergelijking.
-- Installatiebibliotheek uitgebreid.
-- Logboek met één druk op de knop.
-- Ontwikkellijst toegevoegd.
+## v2.1
+- Expertkaart E-002 Hol klinkende tegel geïntegreerd.
+- Exact aantal tegels, aaneengesloten ligging en bijkomende verschijnselen.
+- Kwalificatie: constatering of opleverpunt.
+- Vaktechnische onderbouwing op basis van URL 35-101.
+- Bron en 'Waarom deze inschatting?' toegevoegd.
+- E-001 glastekst behouden en natuurlijker geformuleerd.
