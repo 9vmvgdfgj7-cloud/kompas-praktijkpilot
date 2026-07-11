@@ -1,13 +1,12 @@
-# KOMPAS Core v2.3
+# KOMPAS Core v2.4
 
-Volledige testrelease met Expertkaarten E-001 t/m E-007.
+Praktijkrelease met E-001 t/m E-007.
 
-Nieuw:
-- E-005 Spack-/spuitwerk
-- E-006 Lakwerk
-- E-007 Kitwerk
-- Expertkaarten tonen geen velden van registratiekaarten
-- Enkelvoud/meervoud gecorrigeerd
-- E-004 gatgrootte gekoppeld aan 20 eurocentmunt als pilotkeuze
+## Verwerkt uit het KOMPAS-logboek
+- E-001 beoordeelt nu ook het aantal en de totale lengte van lijnvormige glasschades.
+- E-007 gebruikt één locatie/toepassing, zodat combinaties zoals `badkamer in hal` niet meer ontstaan.
+- Registratiekaarten verversen de beschrijving direct na wijziging van onderdeel of locatie.
+- Daardoor wordt het gekozen deurbeslag, stootbord of ander onderdeel correct in de beschrijving opgenomen.
 
-Plaats de inhoud van deze map in de lokale GitHub-repository, commit en push.
+## Installeren via GitHub Desktop
+Kopieer alle bestanden en mappen uit deze map naar de lokale repositorymap, commit en push.
