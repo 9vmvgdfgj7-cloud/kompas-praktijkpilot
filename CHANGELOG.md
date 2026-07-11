@@ -1,10 +1,7 @@
 # Changelog
 
-## v2.6
-- Sanitairmodule S-001 t/m S-005 toegevoegd.
-- Badkamer- en toilettoepassingen toegevoegd.
-- E-004 behangklaar verfijnd.
-- Warmtepomplocaties beperkt.
-- Installatieteksten verbeterd.
-- Gevelonderdelen uitgebreid.
-- Spackwerk-grammatica gecorrigeerd.
+## v2.6.1
+- Taalkundige correcties sanitair.
+- Registratielogica `Niet afgemonteerd` gecorrigeerd.
+- Micro-locaties toegevoegd aan lakbeschadiging.
+- Dubbele vermelding van beglazing uit de titel verwijderd.

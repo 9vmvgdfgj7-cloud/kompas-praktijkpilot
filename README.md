@@ -1,16 +1,12 @@
-# KOMPAS Core v2.6
+# KOMPAS Core v2.6.1
 
-Sanitairmodule:
-- S-001 Toilet
-- S-002 Wastafel / fontein
-- S-003 Douche
-- S-004 Bad
-- S-005 Kraan
+Kleine praktijkcorrectie op v2.6.
 
-Verwerkt uit het logboek:
-- 20-eurocentmarge alleen voor gaatjes
-- Krimpscheur als afzonderlijke beoordeling
-- Warmtepomplocaties beperkt tot technische ruimte en berging
-- Natuurlijkere installatieteksten
-- Correctie naar het spackwerk
-- Specifieke gevelonderdelen toegevoegd
+## Gewijzigd
+- Sanitairteksten taalkundig verbeterd, waaronder kras aan een bad.
+- `Niet afgemonteerd` gebruikt nu het werkelijk gekozen type en onderdeel.
+- Lakbeschadiging heeft een keuze voor de positie op het bouwdeel.
+- De titel van E-001 bevat niet langer tweemaal beglazing.
+
+## Installeren
+Kopieer de inhoud van deze map naar de lokale GitHub-repository, commit en push.

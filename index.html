@@ -1,9 +1,21 @@
-<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#233142"><title>KOMPAS Core v2.6</title><link rel="stylesheet" href="css/styles.css"></head><body>
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#233142"><title>KOMPAS Core v2.6.1</title><link rel="stylesheet" href="css/styles.css"></head><body>
 <header><h1 id="version"></h1><p id="subtitle"></p><nav><button onclick="show('start')">Start</button><button onclick="show('log')">Logboek</button><button onclick="resetAll()">Nieuwe vastlegging</button></nav><div class="project-choice"><label>Projecttype<select id="projectType"><option>Grondgebonden</option><option>Appartement</option></select></label></div></header>
 <main>
 <section id="start" class="panel"><h2>Wat heb je waargenomen?</h2><input id="search" type="search" placeholder="Zoek waarneming..."><div id="list" class="grid"></div></section>
 <section id="form" class="panel hidden"><div class="top"><div><h2 id="cardTitle"></h2><span id="cardType" class="pill"></span></div><button class="light" onclick="show('start')">Alle waarnemingen</button></div>
-<div id="registrationFields" class="fields"><label>Object<select id="object"></select></label><label>Type<select id="type"></select></label><label>Onderdeel<select id="part"></select></label><label>Locatie<select id="location"></select></label></div>
+<div id="registrationFields" class="fields"><label>Object<select id="object"></select></label><label>Type<select id="type"></select></label><label>Onderdeel<select id="part"></select></label><label>Locatie<select id="location"></select></label>
+<label id="microLocationWrap" class="hidden">Positie op het bouwdeel
+<select id="microLocation">
+<option>Niet gespecificeerd</option>
+<option>Scharnierzijde</option>
+<option>Sluitzijde</option>
+<option>Hoek bovenzijde</option>
+<option>Hoek onderzijde</option>
+<option>Kopse kant</option>
+<option>Voorzijde</option>
+<option>Achterzijde</option>
+</select>
+</label></div>
 
 <div id="expert"></div>
 <label>Aanvullende toelichting inspecteur<textarea id="extra" rows="3" placeholder="Optioneel"></textarea></label>
