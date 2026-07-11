@@ -1,19 +1,16 @@
-# KOMPAS Core v2.5
+# KOMPAS Core v2.6
 
-## Nieuw
-- Projectkeuze `Grondgebonden` of `Appartement`.
-- Automatische VvE-kwalificatie voor buitenschilonderdelen bij appartementen.
-- I-001 Ventilatie.
-- I-002 WTW-unit.
-- I-003 Warmtepomp.
-- I-004 Omvormer zonnepanelen.
-- I-005 Rookmelder.
-- I-006 Elektra / groepenkast.
+Sanitairmodule:
+- S-001 Toilet
+- S-002 Wastafel / fontein
+- S-003 Douche
+- S-004 Bad
+- S-005 Kraan
 
-## Verwerkt uit het logboek
-- Buitenschil bij appartement wordt `Constatering t.b.v. VvE`.
-- Bij behangklaar werk is expliciet vastgelegd dat strijklicht niet mag worden gebruikt.
-- `Stucwerk` toegevoegd als beoogde eindafwerking.
-
-## Installeren
-Kopieer alle bestanden en mappen uit deze release naar de lokale GitHub-repository, commit en push.
+Verwerkt uit het logboek:
+- 20-eurocentmarge alleen voor gaatjes
+- Krimpscheur als afzonderlijke beoordeling
+- Warmtepomplocaties beperkt tot technische ruimte en berging
+- Natuurlijkere installatieteksten
+- Correctie naar het spackwerk
+- Specifieke gevelonderdelen toegevoegd
