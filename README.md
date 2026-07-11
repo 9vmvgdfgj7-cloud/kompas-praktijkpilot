@@ -1,12 +1,13 @@
-# KOMPAS Core v2.6.1
+# KOMPAS Core v2.6.2
 
-Kleine praktijkcorrectie op v2.6.
+Gebouwd op de door Henk aangeleverde actuele masterrepository.
 
-## Gewijzigd
-- Sanitairteksten taalkundig verbeterd, waaronder kras aan een bad.
-- `Niet afgemonteerd` gebruikt nu het werkelijk gekozen type en onderdeel.
-- Lakbeschadiging heeft een keuze voor de positie op het bouwdeel.
-- De titel van E-001 bevat niet langer tweemaal beglazing.
+## Wijzigingen
+- Lakbeschadiging uitgebreid met micro-locaties:
+  scharnierzijde, sluitzijde, bovenzijde, onderzijde, kopse kant, voorzijde en achterzijde.
+- Sanitairteksten taalkundig verbeterd, waaronder `Kras aan het bad in de badkamer`.
+- `Niet afgemonteerd` gebruikt nu het gekozen onderdeel en type.
+- Titel van E-001 beglazing bevat geen dubbele vermelding meer.
 
 ## Installeren
-Kopieer de inhoud van deze map naar de lokale GitHub-repository, commit en push.
+Vervang de bestanden in de lokale GitHub-repository door de inhoud van deze map, commit en push.
