@@ -1,5 +1,5 @@
 # Changelog
 
-## v2.7.4 – S-001
-- Meerwerkhoogte toiletpot toegevoegd.
-- Kitvoegteksten bij toiletpot gecorrigeerd.
+## v2.7.5 – S-001
+- Dynamische waarnemingen per toilet-onderdeel toegevoegd.
+- Onlogische combinaties verwijderd.

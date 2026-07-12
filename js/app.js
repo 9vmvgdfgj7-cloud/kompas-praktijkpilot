@@ -28,14 +28,14 @@ if(id==="installatie_elektra"){shell("I-006","Elektra / groepenkast",field("inst
 if(id==="installatie_vloerverdeler"){shell("I-007","Vloerverdeler",field("eLoc","Locatie",select(["Technische ruimte","Berging"]))+field("instPart","Onderdeel",select(["Verdeler","Pomp","Manometer","Leidingen","Afsluiters","Isolatie"]))+field("instIssue","Waarneming",select(["Beschadigd"])));updateInstallationIssues();$("instPart").onchange=()=>{updateInstallationIssues();render()}}
 if(id==="installatie_wasmachine"){shell("I-008","Wasmachine-/drogeropstelling",field("eLoc","Locatie",select(["Technische ruimte","Berging","Badkamer"]))+field("instPart","Onderdeel",select(["Wasmachinekraan","Afvoer","Sifon","Wandcontactdoos wasmachine","Wandcontactdoos droger","Dubbele wandcontactdoos","Aansluiting"]))+field("instIssue","Waarneming",select(["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Lekt","Los aangebracht","Werkt niet","Afvoer onvoldoende"])));}
 
-if(id==="sanitair_toilet")shell("S-001","Toilet",
+if(id==="sanitair_toilet"){shell("S-001","Toilet",
 field("sanRoom","Ruimte",select(["Toilet","Badkamer"]))+
 field("sanPart","Onderdeel",select(["Toiletpot","Toiletbril","Reservoir","Spoelplaat","Bevestiging","Aansluiting","Kitwerk"]))+
-field("sanIssue","Waarneming",select(["Beschadigd","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Lekt","Spoelt niet goed","Kit ontbreekt","Kit onthecht","Onvoldoende afgewerkt"]))+
+field("sanIssue","Waarneming",select(["Beschadigd"]))+
 field("toiletHeight","Hoogte toiletpot zonder toiletbril (cm)",input("number","42","0.5"))+
 field("toiletMorework","Hoogte conform meerwerk",select(["Niet van toepassing","Hoger geplaatst conform meerwerk","Lager geplaatst conform meerwerk","Afwijkende hoogte conform meerwerk"]))+
 field("checkFlush","Spoeling gecontroleerd?",select(["Ja","Nee"]))+
-field("checkStable","Toiletpot stabiel?",select(["Ja","Nee"])));
+field("checkStable","Toiletpot stabiel?",select(["Ja","Nee"])));updateToiletIssues();$("sanPart").onchange=()=>{updateToiletIssues();render()}}
 
 if(id==="sanitair_wastafel"){shell("S-002","Wastafel / fontein",
 field("sanRoom","Ruimte",select(["Badkamer","Toilet"]))+
@@ -97,6 +97,15 @@ else if(p==="Bevestiging")issues=["Los aangebracht","Beschadigd"];
 else if(p==="Bediening")issues=["Werkt niet","Beschadigd"];
 else if(p==="Afstandsbediening")issues=["Ontbreekt","Beschadigd","Werkt niet"];
 setOptions($("instIssue"),issues)}
+function updateToiletIssues(){if(current?.id!=="sanitair_toilet"||!$("sanPart")||!$("sanIssue"))return;let p=v("sanPart"),issues;
+if(p==="Toiletpot")issues=["Beschadigd","Los","Scheef gemonteerd","Lekt","Spoelt niet goed","Onvoldoende afgewerkt"];
+else if(p==="Toiletbril")issues=["Beschadigd","Los","Scheef gemonteerd","Niet compleet","Ontbreekt"];
+else if(p==="Reservoir")issues=["Beschadigd","Niet compleet","Werkt niet","Lekt","Spoelt niet goed"];
+else if(p==="Spoelplaat")issues=["Beschadigd","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet"];
+else if(p==="Bevestiging")issues=["Los","Beschadigd","Ontbreekt"];
+else if(p==="Aansluiting")issues=["Lekt","Niet compleet","Onvoldoende afgewerkt"];
+else if(p==="Kitwerk")issues=["Kit ontbreekt","Kit onthecht","Onvoldoende afgewerkt"];
+setOptions($("sanIssue"),issues)}
 function v(id){return $(id)?.value||""} function n(id){return Number(v(id)||0)} function one(n,one,many){return n===1?one:many}
 function expertResult(){
 let id=current.id,q="Opleverpunt",title="",desc="",k=[];
