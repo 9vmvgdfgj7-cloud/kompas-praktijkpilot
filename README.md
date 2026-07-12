@@ -1,15 +1,10 @@
-# KOMPAS Core v2.7.3 – Batch A
+# KOMPAS Core v2.7.4 – S-001 Toilet
+
+Alleen kaart S-001 is gewijzigd.
 
 ## Verwerkt
-- Projectspecifieke afspraak / meerwerk blijft beschikbaar.
-- Badmeubel uitgebreid met linker- en rechterlade, front, greep en spiegelkast.
-- Per meubelonderdeel worden alleen logische waarnemingen getoond.
-- Designradiator volledig dynamisch gemaakt:
-  - radiator;
-  - bevestiging;
-  - bediening;
-  - afstandsbediening.
-- Onmogelijke combinaties bij de designradiator verwijderd.
-- Titels en beschrijvingen natuurlijker gemaakt.
+- Keuze toegevoegd voor een hoger of lager geplaatste toiletpot conform meerwerk.
+- Meerwerk wordt automatisch in de beschrijving opgenomen.
+- `Kitwerk bij kitwerk` vervangen door natuurlijke tekst over de kitvoeg bij de toiletpot.
 
-Deze release bevat uitsluitend Batch A.
+Andere kaarten zijn niet aangepast.

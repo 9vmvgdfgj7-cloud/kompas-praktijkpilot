@@ -1,8 +1,5 @@
 # Changelog
 
-## v2.7.3 – Batch A
-- Badmeubel en ladecontrole uitgebreid.
-- Dynamische sanitairkeuzes toegevoegd.
-- Designradiator opnieuw opgebouwd.
-- Onlogische combinaties verwijderd.
-- Tekst- en titelgenerator voor designradiator verbeterd.
+## v2.7.4 – S-001
+- Meerwerkhoogte toiletpot toegevoegd.
+- Kitvoegteksten bij toiletpot gecorrigeerd.
