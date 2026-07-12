@@ -36,12 +36,12 @@ field("toiletHeight","Hoogte toiletpot zonder toiletbril (cm)",input("number","4
 field("checkFlush","Spoeling gecontroleerd?",select(["Ja","Nee"]))+
 field("checkStable","Toiletpot stabiel?",select(["Ja","Nee"])));
 
-if(id==="sanitair_wastafel")shell("S-002","Wastafel / fontein",
+if(id==="sanitair_wastafel"){shell("S-002","Wastafel / fontein",
 field("sanRoom","Ruimte",select(["Badkamer","Toilet"]))+
-field("sanPart","Onderdeel",select(["Wastafel","Fontein","Badmeubel","Lade","Spiegel","Kraan","Afvoer","Overloop","Aansluiting","Kitwerk"]))+
-field("sanIssue","Waarneming",select(["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Lekt","Afvoer verstopt","Kit ontbreekt","Kit onthecht","Onvoldoende afgewerkt","Lade loopt niet goed","Lade sluit niet","Lade scheef gemonteerd"]))+
+field("sanPart","Onderdeel",select(["Wastafel","Fontein","Badmeubel","Lade links","Lade rechts","Front","Greep","Spiegel","Spiegelkast","Kraan","Afvoer","Overloop","Aansluiting","Kitwerk"]))+
+field("sanIssue","Waarneming",select(["Beschadigd"]))+
 field("checkWater","Waterloop gecontroleerd?",select(["Ja","Nee"]))+
-field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));
+field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));updateSanitaryIssues();$("sanPart").onchange=()=>{updateSanitaryIssues();render()}}
 
 if(id==="sanitair_douche")shell("S-003","Douche",
 field("sanRoom","Ruimte",select(["Badkamer"]))+
@@ -63,7 +63,10 @@ field("sanPart","Onderdeel",select(["Wastafelkraan","Fonteinkraan","Douchekraan"
 field("sanIssue","Waarneming",select(["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Druppelt","Lekt","Bediening zwaar","Onvoldoende afgewerkt"]))+
 field("checkWater","Werking gecontroleerd?",select(["Ja","Nee"])));
 
-if(id==="installatie_designradiator"){shell("I-009","Designradiator",field("eLoc","Locatie",select(["Badkamer"]))+field("instPart","Onderdeel",select(["Radiator","Bevestiging","Aansluiting","Bediening","Afstandsbediening"]))+field("instIssue","Waarneming",select(["Beschadigd","Los aangebracht","Scheef aangebracht","Werkt niet","Lekt","Afstandsbediening ontbreekt","Afstandsbediening werkt niet"])));}
+if(id==="installatie_designradiator"){shell("I-009","Designradiator",
+field("eLoc","Locatie",select(["Badkamer"]))+
+field("instPart","Onderdeel",select(["Radiator","Bevestiging","Bediening","Afstandsbediening"]))+
+field("instIssue","Waarneming",select(["Beschadigd"])));updateDesignRadiatorIssues();$("instPart").onchange=()=>{updateDesignRadiatorIssues();render()}}
 if(id==="installatie_videofoon"){shell("I-010","Videofoon",field("eLoc","Locatie",select(["Hal","Woonkamer"]))+field("instPart","Onderdeel",select(["Binnenpost","Display","Hoorn","Bediening","Bevestiging"]))+field("instIssue","Waarneming",select(["Ontbreekt","Beschadigd","Los aangebracht","Scheef aangebracht","Werkt niet","Beeld ontbreekt","Geluid ontbreekt","Deuropener werkt niet"])));}
 if(id==="installatie_loze_leiding"){shell("I-011","Loze leiding",field("eLoc","Locatie",select(D.locations))+field("instPart","Onderdeel",select(["Loze leiding","Inbouwdoos","Afdekplaat","Uitmonding"]))+field("instIssue","Waarneming",select(["Ontbreekt","Niet compleet","Beschadigd","Niet bereikbaar","Niet doorvoerbaar","Afdekplaat ontbreekt"]))+field("controlWire","Controledraad aanwezig?",select(["Ja","Nee","Niet gecontroleerd"])));}
 
@@ -75,6 +78,23 @@ function updateInstallationIssues(){if(!$("instPart")||!$("instIssue"))return;le
 if(id==="installatie_wtw"){if(p==="WTW-unit")issues=["Beschadigd","Trillingen","Afwijkend geluid","Werkt niet","Storing zichtbaar","Los aangebracht"];else if(p==="Filter")issues=["Ontbreekt","Vervuild","Beschadigd"];else if(p==="Display")issues=["Beschadigd","Werkt niet","Storing zichtbaar"];else if(p==="Condensaansluiting")issues=["Ontbreekt","Niet aangesloten","Lekt","Sluit niet aan"];else if(p==="Ventilator")issues=["Afwijkend geluid","Werkt niet","Beschadigd"];else issues=["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Sluit niet aan","Los aangebracht"]}
 if(id==="installatie_warmtepomp"){if(p==="Manometer broncircuit"||p==="Manometer verwarmingsinstallatie")issues=["Druk lager dan 1 bar","Druk hoger dan 2 bar","Beschadigd","Niet leesbaar"];else if(p==="Displaybeglazing")issues=["Gebarsten","Beschadigd"];else if(p==="Leidingisolatie")issues=["Ontbreekt","Onderbroken","Beschadigd"];else if(p==="Condensafvoer")issues=["Lekt","Niet aangesloten","Sluit niet aan","Verstopt"];else issues=["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Sluit niet aan","Werkt niet","Storing zichtbaar","Los aangebracht","Lekkage zichtbaar"]}
 if(id==="installatie_vloerverdeler"){if(p==="Manometer")issues=["Druk lager dan 1 bar","Druk hoger dan 2 bar","Beschadigd","Niet leesbaar"];else if(p==="Leidingen")issues=["Lekt","Zweet","Beschadigd","Niet aangesloten","Isolatie ontbreekt"];else issues=["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Werkt niet","Lekt","Los aangebracht"]}
+setOptions($("instIssue"),issues)}
+function updateSanitaryIssues(){if(current?.id!=="sanitair_wastafel"||!$("sanPart")||!$("sanIssue"))return;let p=v("sanPart"),issues;
+if(["Lade links","Lade rechts"].includes(p))issues=["Beschadigd","Loopt zwaar","Sluit niet","Scheef gemonteerd","Los gemonteerd"];
+else if(p==="Badmeubel")issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Onvoldoende afgewerkt"];
+else if(p==="Front")issues=["Beschadigd","Kras","Scheef gemonteerd","Los gemonteerd"];
+else if(p==="Greep")issues=["Beschadigd","Los","Ontbreekt"];
+else if(["Spiegel","Spiegelkast"].includes(p))issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet"];
+else if(["Afvoer","Overloop","Aansluiting"].includes(p))issues=["Ontbreekt","Niet compleet","Lekt","Afvoer verstopt","Onvoldoende afgewerkt"];
+else if(p==="Kitwerk")issues=["Kit ontbreekt","Kit onthecht","Onvoldoende afgewerkt"];
+else issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Lekt","Onvoldoende afgewerkt"];
+setOptions($("sanIssue"),issues)}
+
+function updateDesignRadiatorIssues(){if(current?.id!=="installatie_designradiator"||!$("instPart")||!$("instIssue"))return;let p=v("instPart"),issues;
+if(p==="Radiator")issues=["Beschadigd","Los aangebracht","Scheef aangebracht","Werkt niet","Lekt"];
+else if(p==="Bevestiging")issues=["Los aangebracht","Beschadigd"];
+else if(p==="Bediening")issues=["Werkt niet","Beschadigd"];
+else if(p==="Afstandsbediening")issues=["Ontbreekt","Beschadigd","Werkt niet"];
 setOptions($("instIssue"),issues)}
 function v(id){return $(id)?.value||""} function n(id){return Number(v(id)||0)} function one(n,one,many){return n===1?one:many}
 function expertResult(){
@@ -92,6 +112,9 @@ else if(id==="installatie_rookmelder"){title=`${q} - ${onderdeel} ${waarneming.t
 else if(id==="installatie_elektra"){title=`${q} - ${onderdeel} ${waarneming.toLowerCase()} - ${loc}`}
 else if(id==="installatie_videofoon"){title=`${q} - ${onderdeel} ${waarneming.toLowerCase()} - Videofoon - ${loc}`}
 else if(id==="installatie_loze_leiding"){title=`${q} - ${onderdeel} ${waarneming.toLowerCase()} - ${loc}`}
+else if(id==="installatie_designradiator"){
+if(onderdeel==="Radiator")title=`${q} - Designradiator ${waarneming.toLowerCase()} - Badkamer`;
+else title=`${q} - ${onderdeel} ${waarneming.toLowerCase()} - Designradiator - Badkamer`}
 else{title=`${q} - ${onderdeel} ${waarneming.toLowerCase()} - ${systeem} - ${loc}`}
 if(id==="installatie_warmtepomp"&&(onderdeel==="Manometer broncircuit"||onderdeel==="Manometer verwarmingsinstallatie"))desc=`De ${onderdeel.toLowerCase()} van de warmtepomp geeft ${waarneming.toLowerCase()} aan.`;
 else if(id==="installatie_wtw"&&onderdeel==="WTW-unit"&&waarneming==="Werkt niet")desc=`De WTW-unit in de technische ruimte functioneert niet.`;
@@ -100,7 +123,18 @@ else if(id==="installatie_vloerverdeler"&&onderdeel==="Verdeler"&&waarneming==="
 else if(id==="installatie_elektra"&&onderdeel==="Groepenverklaring"&&waarneming==="Ontbreekt")desc=`De groepenverklaring in de meterkast ontbreekt.`;
 else if(id==="installatie_elektra"&&onderdeel==="Groepenverklaring"&&waarneming==="Komt niet overeen met de groepenkast")desc=`De groepenverklaring in de meterkast komt niet overeen met de werkelijke indeling van de groepenkast.`;
 else if(id==="installatie_rookmelder"&&onderdeel==="Stofkap"&&waarneming==="Stofkap ontbreekt")desc=`De stofkap van de rookmelder ontbreekt in de vluchtroute.`;
-else if(id==="installatie_designradiator"&&onderdeel==="Afstandsbediening"&&waarneming==="Afstandsbediening ontbreekt")desc=`De afstandsbediening van de designradiator in de badkamer ontbreekt.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Radiator"&&waarneming==="Beschadigd")desc=`De designradiator in de badkamer is beschadigd.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Radiator"&&waarneming==="Los aangebracht")desc=`De designradiator in de badkamer zit los.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Radiator"&&waarneming==="Scheef aangebracht")desc=`De designradiator in de badkamer is scheef aangebracht.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Radiator"&&waarneming==="Werkt niet")desc=`De designradiator in de badkamer functioneert niet.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Radiator"&&waarneming==="Lekt")desc=`Lekkage vastgesteld bij de designradiator in de badkamer.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Bevestiging"&&waarneming==="Los aangebracht")desc=`De bevestiging van de designradiator in de badkamer zit los.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Bevestiging"&&waarneming==="Beschadigd")desc=`De bevestiging van de designradiator in de badkamer is beschadigd.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Bediening"&&waarneming==="Werkt niet")desc=`De bediening van de designradiator in de badkamer functioneert niet.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Bediening"&&waarneming==="Beschadigd")desc=`De bediening van de designradiator in de badkamer is beschadigd.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Afstandsbediening"&&waarneming==="Ontbreekt")desc=`De afstandsbediening van de designradiator ontbreekt.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Afstandsbediening"&&waarneming==="Beschadigd")desc=`De afstandsbediening van de designradiator is beschadigd.`;
+else if(id==="installatie_designradiator"&&onderdeel==="Afstandsbediening"&&waarneming==="Werkt niet")desc=`De afstandsbediening van de designradiator functioneert niet.`;
 else if(id==="installatie_videofoon"&&waarneming==="Beeld ontbreekt")desc=`De videofoon in ${loc.toLowerCase()} geeft geen beeld.`;
 else if(id==="installatie_videofoon"&&waarneming==="Geluid ontbreekt")desc=`De videofoon in ${loc.toLowerCase()} geeft geen geluid.`;
 else if(id==="installatie_videofoon"&&waarneming==="Deuropener werkt niet")desc=`De deuropener van de videofoon in ${loc.toLowerCase()} functioneert niet.`;
@@ -114,7 +148,14 @@ else desc=`${onderdeel} van de ${systeem.toLowerCase()} is${loc?` in ${loc.toLow
 let warning="";
 if(id==="installatie_warmtepomp")warning="Let op: controleer welke manometer wordt afgelezen. De manometer van het broncircuit hoort bij een afzonderlijk gesloten circuit met een ander medium en mag niet als de waterinstallatie van de woning worden bijgevuld.";
 k=["Installaties en installatieonderdelen dienen compleet, deugdelijk gemonteerd en passend aangesloten te zijn overeenkomstig de projectspecificatie en de verwerkingsvoorschriften van de fabrikant.","Projectspecifieke technische omschrijving, installatietekeningen, productdocumentatie en verwerkingsvoorschriften van de fabrikant.",`De waarneming ‘${waarneming.toLowerCase()}’ betreft een zichtbare afwijking, ontbrekend onderdeel of functieverlies van de installatie.`,"Beschrijf uitsluitend wat zichtbaar of functioneel is vastgesteld. Doe geen uitspraak over de oorzaak of herstelwijze.",warning||"Controleer locatie, onderdeel, aansluiting en zichtbare werking."];}
-if(id.startsWith("sanitair_")){q="Opleverpunt";let room=v("sanRoom"),part=v("sanPart"),issue=v("sanIssue");title=`${q} - ${issue} - ${part} - ${room}`;if(issue==="Ontbreekt")desc=`${part} ontbreekt in ${room.toLowerCase()}.`;else if(issue==="Beschadigd")desc=`Beschadiging aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kras")desc=`Kras aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Los")desc=`${part} zit los in ${room.toLowerCase()}.`;else if(issue==="Scheef gemonteerd")desc=`${part} is scheef gemonteerd in ${room.toLowerCase()}.`;else if(issue==="Niet compleet")desc=`${part} is niet compleet in ${room.toLowerCase()}.`;else if(issue==="Lekt")desc=`Lekkage vastgesteld bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Druppelt")desc=`De ${part.toLowerCase()} in ${room.toLowerCase()} druppelt.`;else if(issue==="Werkt niet")desc=`${part} in ${room.toLowerCase()} functioneert niet.`;else if(issue==="Spoelt niet goed")desc=`De toiletpot in ${room.toLowerCase()} spoelt niet goed door.`;else if(issue==="Afvoer onvoldoende")desc=`De afvoer van ${part.toLowerCase()} in ${room.toLowerCase()} functioneert onvoldoende.`;else if(issue==="Kit ontbreekt")desc=`Kitwerk ontbreekt bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kit onthecht")desc=`Het kitwerk bij ${part.toLowerCase()} in ${room.toLowerCase()} is onthecht.`;else if(issue==="Onvoldoende afgewerkt")desc=`${part} is onvoldoende afgewerkt in ${room.toLowerCase()}.`;else desc=`${issue} bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;if(id==="sanitair_toilet"&&part==="Toiletpot")desc+=` De gemeten hoogte van de toiletpot, gemeten zonder toiletbril, bedraagt ${n("toiletHeight")} cm.`;k=["Sanitair en bijbehorende onderdelen dienen compleet, deugdelijk gemonteerd, bruikbaar en vrij van zichtbare lekkage te zijn.","Projectspecifieke technische omschrijving, productdocumentatie, montagevoorschriften en gebruikelijke uitvoeringspraktijk.","De gekozen waarneming betreft een zichtbare afwijking, ontbrekend onderdeel, functieverlies of lekkage en wordt daarom als opleverpunt vastgelegd.","Controleer sanitair visueel en functioneel. Leg alleen vast wat daadwerkelijk is gecontroleerd.","Controleer bevestiging, werking, waterloop, afvoer, aansluitingen en kitwerk. Bij toilethoogte geldt doorgaans gebruikelijke praktijk en niet automatisch een expliciete BBL-eis."];}
+if(id.startsWith("sanitair_")){q="Opleverpunt";let room=v("sanRoom"),part=v("sanPart"),issue=v("sanIssue");title=`${q} - ${issue} - ${part} - ${room}`;if(issue==="Ontbreekt")desc=`${part} ontbreekt in ${room.toLowerCase()}.`;else if(issue==="Beschadigd")desc=`Beschadiging aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kras")desc=`Kras aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Los")desc=`${part} zit los in ${room.toLowerCase()}.`;else if(issue==="Scheef gemonteerd")desc=`${part} is scheef gemonteerd in ${room.toLowerCase()}.`;else if(issue==="Niet compleet")desc=`${part} is niet compleet in ${room.toLowerCase()}.`;else if(issue==="Lekt")desc=`Lekkage vastgesteld bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Druppelt")desc=`De ${part.toLowerCase()} in ${room.toLowerCase()} druppelt.`;else if(issue==="Werkt niet")desc=`${part} in ${room.toLowerCase()} functioneert niet.`;else if(issue==="Spoelt niet goed")desc=`De toiletpot in ${room.toLowerCase()} spoelt niet goed door.`;else if(issue==="Afvoer onvoldoende")desc=`De afvoer van ${part.toLowerCase()} in ${room.toLowerCase()} functioneert onvoldoende.`;else if(issue==="Kit ontbreekt")desc=`Kitwerk ontbreekt bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kit onthecht")desc=`Het kitwerk bij ${part.toLowerCase()} in ${room.toLowerCase()} is onthecht.`;else if(issue==="Onvoldoende afgewerkt")desc=`${part} is onvoldoende afgewerkt in ${room.toLowerCase()}.`;
+else if(["Lade links","Lade rechts"].includes(part)&&issue==="Loopt zwaar")desc=`De ${part.toLowerCase()} van het badmeubel in ${room.toLowerCase()} loopt zwaar.`;
+else if(["Lade links","Lade rechts"].includes(part)&&issue==="Sluit niet")desc=`De ${part.toLowerCase()} van het badmeubel in ${room.toLowerCase()} sluit niet goed.`;
+else if(["Lade links","Lade rechts"].includes(part)&&issue==="Scheef gemonteerd")desc=`De ${part.toLowerCase()} van het badmeubel in ${room.toLowerCase()} is scheef gemonteerd.`;
+else if(["Lade links","Lade rechts"].includes(part)&&issue==="Los gemonteerd")desc=`De ${part.toLowerCase()} van het badmeubel in ${room.toLowerCase()} zit los.`;
+else if(part==="Badmeubel"&&issue==="Beschadigd")desc=`Het badmeubel in ${room.toLowerCase()} is beschadigd.`;
+else if(part==="Badmeubel"&&issue==="Kras")desc=`Kras aan het badmeubel in ${room.toLowerCase()}.`;
+else desc=`${issue} bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;if(id==="sanitair_toilet"&&part==="Toiletpot")desc+=` De gemeten hoogte van de toiletpot, gemeten zonder toiletbril, bedraagt ${n("toiletHeight")} cm.`;k=["Sanitair en bijbehorende onderdelen dienen compleet, deugdelijk gemonteerd, bruikbaar en vrij van zichtbare lekkage te zijn.","Projectspecifieke technische omschrijving, productdocumentatie, montagevoorschriften en gebruikelijke uitvoeringspraktijk.","De gekozen waarneming betreft een zichtbare afwijking, ontbrekend onderdeel, functieverlies of lekkage en wordt daarom als opleverpunt vastgelegd.","Controleer sanitair visueel en functioneel. Leg alleen vast wat daadwerkelijk is gecontroleerd.","Controleer bevestiging, werking, waterloop, afvoer, aansluitingen en kitwerk. Bij toilethoogte geldt doorgaans gebruikelijke praktijk en niet automatisch een expliciete BBL-eis."];}
 return{q,title,desc,k};}
 const exteriorLocations=["Balkon","Galerij","Gevel","Buitenruimte voor","Buitenruimte achter"];
 function selectedLocation(){if(current?.id==="kitwerk")return v("kitPlace");if(current?.cardType==="expert")return v("eLoc");return v("location")}

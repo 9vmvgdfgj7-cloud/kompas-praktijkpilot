@@ -1,3 +1,15 @@
-# KOMPAS Core v2.7.2
+# KOMPAS Core v2.7.3 – Batch A
 
-Nieuw: videofoon alleen bij appartementen, designradiator, loze leiding met controledraad, projectspecifieke afspraak/meerwerk en badmeubel.
+## Verwerkt
+- Projectspecifieke afspraak / meerwerk blijft beschikbaar.
+- Badmeubel uitgebreid met linker- en rechterlade, front, greep en spiegelkast.
+- Per meubelonderdeel worden alleen logische waarnemingen getoond.
+- Designradiator volledig dynamisch gemaakt:
+  - radiator;
+  - bevestiging;
+  - bediening;
+  - afstandsbediening.
+- Onmogelijke combinaties bij de designradiator verwijderd.
+- Titels en beschrijvingen natuurlijker gemaakt.
+
+Deze release bevat uitsluitend Batch A.
