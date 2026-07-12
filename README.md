@@ -1,13 +1,14 @@
-# KOMPAS Core v2.6.2
+# KOMPAS Core v2.6.3 – Quality Release
 
-Gebouwd op de door Henk aangeleverde actuele masterrepository.
+Gebouwd op de actuele masterrepository.
 
-## Wijzigingen
-- Lakbeschadiging uitgebreid met micro-locaties:
-  scharnierzijde, sluitzijde, bovenzijde, onderzijde, kopse kant, voorzijde en achterzijde.
-- Sanitairteksten taalkundig verbeterd, waaronder `Kras aan het bad in de badkamer`.
-- `Niet afgemonteerd` gebruikt nu het gekozen onderdeel en type.
-- Titel van E-001 beglazing bevat geen dubbele vermelding meer.
-
-## Installeren
-Vervang de bestanden in de lokale GitHub-repository door de inhoud van deze map, commit en push.
+## Kwaliteitsslag
+- WTW-unit alleen in technische ruimte.
+- Warmtepomp alleen in technische ruimte of berging.
+- Omvormer zonder overbodige locatiekeuze.
+- Rookmelder standaard in vluchtroute en stofkap toegevoegd.
+- Elektra-combinaties dynamisch beperkt.
+- Groepenkast automatisch in meterkast.
+- Titels en beschrijvingen voor installaties natuurlijker gemaakt.
+- Waterslag-taal gecorrigeerd.
+- Geen nieuwe vakgebieden toegevoegd.
