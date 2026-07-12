@@ -1,14 +1,14 @@
-# KOMPAS Core v2.6.3 – Quality Release
+# KOMPAS Core v2.7 – Installaties 2.0
 
-Gebouwd op de actuele masterrepository.
+Nieuw en verbeterd:
+- Warmtepomp 2.0 met twee afzonderlijke manometers.
+- WTW 2.0 met onderdelen en waarnemingen die logisch bij elkaar horen.
+- I-007 Vloerverdeler.
+- I-008 Wasmachine-/drogeropstelling.
+- Groepenkast 2.0 inclusief groepenverklaring.
+- Rookmelderteksten verfijnd.
+- Dynamische keuzes: onlogische combinaties worden niet getoond.
+- Praktijkwaarschuwing bij de manometer van het broncircuit.
 
-## Kwaliteitsslag
-- WTW-unit alleen in technische ruimte.
-- Warmtepomp alleen in technische ruimte of berging.
-- Omvormer zonder overbodige locatiekeuze.
-- Rookmelder standaard in vluchtroute en stofkap toegevoegd.
-- Elektra-combinaties dynamisch beperkt.
-- Groepenkast automatisch in meterkast.
-- Titels en beschrijvingen voor installaties natuurlijker gemaakt.
-- Waterslag-taal gecorrigeerd.
-- Geen nieuwe vakgebieden toegevoegd.
+Installeren:
+kopieer de inhoud van deze map naar de lokale GitHub-repository, commit en push.
