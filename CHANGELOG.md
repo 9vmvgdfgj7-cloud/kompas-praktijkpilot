@@ -1,6 +1,8 @@
 # Changelog
 
-## v2.7.1
-- Kritieke regressie in sanitairkaarten hersteld.
-- Alle sanitaire invoervelden opnieuw gekoppeld aan `buildExpert`.
-- Toilethoogte verduidelijkt: gemeten zonder toiletbril.
+## v2.7.2
+- Videofoon voor appartementen.
+- Loze leiding met controledraad.
+- Designradiator.
+- Meerwerk/projectspecifieke afspraak.
+- Badmeubel.
