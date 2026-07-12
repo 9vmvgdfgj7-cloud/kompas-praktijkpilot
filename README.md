@@ -1,14 +1,13 @@
-# KOMPAS Core v2.7 – Installaties 2.0
+# KOMPAS Core v2.7.1
 
-Nieuw en verbeterd:
-- Warmtepomp 2.0 met twee afzonderlijke manometers.
-- WTW 2.0 met onderdelen en waarnemingen die logisch bij elkaar horen.
-- I-007 Vloerverdeler.
-- I-008 Wasmachine-/drogeropstelling.
-- Groepenkast 2.0 inclusief groepenverklaring.
-- Rookmelderteksten verfijnd.
-- Dynamische keuzes: onlogische combinaties worden niet getoond.
-- Praktijkwaarschuwing bij de manometer van het broncircuit.
+Hotfix op v2.7.
 
-Installeren:
-kopieer de inhoud van deze map naar de lokale GitHub-repository, commit en push.
+## Hersteld
+- S-001 Toilet: invoervelden terug.
+- S-002 Wastafel / fontein: invoervelden terug.
+- S-003 Douche: invoervelden terug.
+- S-004 Bad: invoervelden terug.
+- S-005 Kraan: invoervelden terug.
+- Toilethoogte wordt omschreven als gemeten zonder toiletbril.
+
+De installatiemodule van v2.7 is behouden.
