@@ -1,8 +1,40 @@
-<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#233142"><title>KOMPAS Core v2.6.1</title><link rel="stylesheet" href="css/styles.css"></head><body>
-<header><h1 id="version"></h1><p id="subtitle"></p><nav><button onclick="show('start')">Start</button><button onclick="show('log')">Logboek</button><button onclick="resetAll()">Nieuwe vastlegging</button></nav><div class="project-choice"><label>Projecttype<select id="projectType"><option>Grondgebonden</option><option>Appartement</option></select></label></div></header>
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#233142"><title>KOMPAS Next v2.8 BETA</title><link rel="stylesheet" href="css/styles.css"></head><body>
+<header><h1 id="version"></h1><p id="subtitle"></p><nav>
+<button onclick="goHome()">Start</button>
+<button onclick="show('log')">Logboek</button>
+<button onclick="resetAll()">Nieuwe vastlegging</button>
+</nav>
+<div class="mode-switch">
+<label><input type="radio" name="viewMode" value="rooms" checked> Ruimteweergave <span class="beta">BETA</span></label>
+<label><input type="radio" name="viewMode" value="classic"> Klassieke weergave</label>
+</div><div class="project-choice"><label>Projecttype<select id="projectType"><option>Grondgebonden</option><option>Appartement</option></select></label></div></header>
 <main>
-<section id="start" class="panel"><h2>Wat heb je waargenomen?</h2><input id="search" type="search" placeholder="Zoek waarneming..."><div id="list" class="grid"></div></section>
-<section id="form" class="panel hidden"><div class="top"><div><h2 id="cardTitle"></h2><span id="cardType" class="pill"></span></div><button class="light" onclick="show('start')">Alle waarnemingen</button></div>
+<section id="roomHome" class="panel">
+<h2>Waar sta je?</h2>
+<p class="intro">Kies de ruimte die je inspecteert.</p>
+<div id="roomGrid" class="room-grid"></div>
+</section>
+
+<section id="roomObjects" class="panel hidden">
+<div class="top">
+<div><h2 id="roomTitle"></h2><span class="pill">Ruimteweergave BETA</span></div>
+<button class="light" onclick="showRoomHome()">Alle ruimtes</button>
+</div>
+<p class="intro">Wat zie je in deze ruimte?</p>
+<div id="objectGrid" class="object-grid"></div>
+</section>
+
+<section id="roomObjectChoices" class="panel hidden">
+<div class="top">
+<div><h2 id="objectChoiceTitle"></h2><span id="roomContextPill" class="pill"></span></div>
+<button class="light" onclick="showCurrentRoom()">Terug naar ruimte</button>
+</div>
+<p class="intro">Wat heb je waargenomen?</p>
+<div id="roomChoiceGrid" class="grid"></div>
+</section>
+
+<section id="start" class="panel hidden"><h2>Wat heb je waargenomen?</h2><input id="search" type="search" placeholder="Zoek waarneming..."><div id="list" class="grid"></div></section>
+<section id="form" class="panel hidden"><div class="top"><div><h2 id="cardTitle"></h2><span id="cardType" class="pill"></span></div><button class="light" onclick="backFromCard()">Terug</button></div>
 <div id="registrationFields" class="fields"><label>Object<select id="object"></select></label><label>Type<select id="type"></select></label><label>Onderdeel<select id="part"></select></label><label>Locatie<select id="location"></select></label>
 <label id="microLocationWrap" class="hidden">Positie op het bouwdeel
 <select id="microLocation">
@@ -26,6 +58,6 @@
 <div class="result"><h3>Titel</h3><div id="titleOut" class="out"></div><button data-copy="titleOut">Titel kopiëren</button></div>
 <div class="result"><h3>Beschrijving</h3><div id="descOut" class="out"></div><button data-copy="descOut">Beschrijving kopiëren</button></div>
 <div class="result"><h3>Advies</h3><div id="adviceOut" class="out"></div><button data-copy="adviceOut">Advies kopiëren</button></div>
-<div class="actions"><button id="quickLog">Aan KOMPAS toevoegen</button><button class="light" onclick="show('start')">Andere waarneming</button></div></section>
+<div class="actions"><button id="quickLog">Aan KOMPAS toevoegen</button><button class="light" onclick="backFromCard()">Andere waarneming</button></div></section>
 <section id="log" class="panel hidden"><h2>KOMPAS Logboek</h2><textarea id="logText" rows="16"></textarea><div class="actions"><button id="downloadLog">Logboek downloaden</button><button class="light" onclick="show('start')">Terug</button></div></section>
 </main><script src="js/data.js"></script><script src="js/app.js"></script></body></html>

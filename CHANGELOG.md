@@ -1,5 +1,8 @@
 # Changelog
 
-## v2.7.5 – S-001
-- Dynamische waarnemingen per toilet-onderdeel toegevoegd.
-- Onlogische combinaties verwijderd.
+## KOMPAS Next v2.8 BETA
+- Nieuwe ruimteweergave toegevoegd.
+- Badkamer als eerste testbare ruimte.
+- Klassieke weergave behouden.
+- Bestaande kaarten gekoppeld aan badkamerobjecten.
+- Contextuele terugnavigatie toegevoegd.

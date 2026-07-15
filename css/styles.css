@@ -2,3 +2,17 @@
 .project-choice{max-width:280px;margin-top:10px}
 .project-choice label{margin-top:0;color:#fff}
 .project-choice select{margin-top:5px}
+
+.mode-switch{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding:8px 10px;background:rgba(255,255,255,.1);border-radius:10px}
+.mode-switch label{margin:0;color:#fff;font-weight:600;display:flex;align-items:center;gap:6px}
+.mode-switch input{width:auto}
+.beta{font-size:10px;background:#fff;color:#233142;padding:2px 5px;border-radius:5px}
+.intro{color:#667085;margin-top:4px}
+.room-grid,.object-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.room-card,.object-card{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:13px;padding:16px 12px;text-align:left;min-height:82px}
+.room-card strong,.object-card strong{display:block;font-size:16px;margin-bottom:5px}
+.room-card span,.object-card span{font-size:12px;color:#667085}
+.room-card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.room-card.disabled{opacity:.48}
+.context-banner{background:#eef3f7;border:1px solid #cbd7e1;border-radius:10px;padding:9px 11px;margin:10px 0}
+@media(max-width:700px){.room-grid,.object-grid{grid-template-columns:1fr 1fr}}

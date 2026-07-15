@@ -1,12 +1,55 @@
-const D=window.KOMPAS_DATA,$=id=>document.getElementById(id);let current=null;
+const D=window.KOMPAS_DATA,$=id=>document.getElementById(id);let current=null,currentRoom=null,currentRoomObject=null,viewMode="rooms";
 const locOpts=()=>D.locations.map(x=>`<option>${x}</option>`).join("");
-function show(id){["start","form","log"].forEach(x=>$(x).classList.toggle("hidden",x!==id));if(id==="start")renderList()}
-function resetAll(){current=null;$("search").value="";$("extra").value="";show("start")}
+const allPanels=["roomHome","roomObjects","roomObjectChoices","start","form","log"];
+const roomDefinitions=[
+{id:"Hal",label:"Hal",icon:"🚪",enabled:false},
+{id:"Meterkast",label:"Meterkast",icon:"⚡",enabled:false},
+{id:"Toilet",label:"Toilet",icon:"🚽",enabled:false},
+{id:"Badkamer",label:"Badkamer",icon:"🚿",enabled:true},
+{id:"Woonkamer",label:"Woonkamer",icon:"🏠",enabled:false},
+{id:"Keuken",label:"Keuken",icon:"🍳",enabled:false},
+{id:"Slaapkamer 1",label:"Slaapkamer 1",icon:"🛏",enabled:false},
+{id:"Slaapkamer 2",label:"Slaapkamer 2",icon:"🛏",enabled:false},
+{id:"Technische ruimte",label:"Technische ruimte",icon:"🔧",enabled:false},
+{id:"Berging",label:"Berging",icon:"🚲",enabled:false},
+{id:"Buitenruimte voor",label:"Buiten voor",icon:"🏡",enabled:false},
+{id:"Buitenruimte achter",label:"Buiten achter",icon:"🌳",enabled:false}
+];
+const bathroomObjects=[
+{id:"deur",label:"Deur",icon:"🚪",mode:"generic",objectId:"deur"},
+{id:"kozijn",label:"Kozijn",icon:"🪟",mode:"generic",objectId:"kozijn"},
+{id:"wand",label:"Wand",icon:"⬜",mode:"generic",objectId:"wand"},
+{id:"plafond",label:"Plafond",icon:"⬜",mode:"generic",objectId:"plafond"},
+{id:"vloer",label:"Vloer",icon:"◻️",mode:"generic",objectId:"vloer"},
+{id:"tegelwerk",label:"Tegelwerk",icon:"🔲",mode:"choices",cards:["hoogteverschil_tegelwerk","hol_klinkende_tegel"]},
+{id:"douche",label:"Douche",icon:"🚿",mode:"card",card:"sanitair_douche"},
+{id:"wastafel",label:"Wastafel / fontein",icon:"🚰",mode:"card",card:"sanitair_wastafel"},
+{id:"bad",label:"Bad",icon:"🛁",mode:"card",card:"sanitair_bad"},
+{id:"toilet",label:"Toilet",icon:"🚽",mode:"card",card:"sanitair_toilet"},
+{id:"designradiator",label:"Designradiator",icon:"🔥",mode:"card",card:"installatie_designradiator"},
+{id:"ventilatie",label:"Ventiel / ventilatie",icon:"🌬",mode:"card",card:"installatie_ventilatie"},
+{id:"schakelaar",label:"Schakelaar",icon:"💡",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Schakelaar"}},
+{id:"wcd",label:"Wandcontactdoos",icon:"🔌",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Wandcontactdoos"}},
+{id:"overig",label:"Overig object",icon:"➕",mode:"classic"}
+];
+function show(id){allPanels.forEach(x=>$(x)?.classList.toggle("hidden",x!==id));if(id==="start")renderList()}
+function getViewMode(){return document.querySelector('input[name="viewMode"]:checked')?.value||"rooms"}
+function goHome(){viewMode=getViewMode();if(viewMode==="classic"){show("start");renderList()}else showRoomHome()}
+function resetAll(){current=null;currentRoomObject=null;$("search").value="";$("extra").value="";$("projectAgreement").value="";goHome()}
+function showRoomHome(){currentRoom=null;currentRoomObject=null;renderRooms();show("roomHome")}
+function renderRooms(){$("roomGrid").innerHTML=roomDefinitions.map(r=>`<button class="room-card ${r.enabled?"active":"disabled"}" data-room="${r.id}" ${r.enabled?"":"disabled"}><strong>${r.icon} ${r.label}</strong><span>${r.enabled?"Beschikbaar om te testen":"Volgt na de badkamerpilot"}</span></button>`).join("");document.querySelectorAll("[data-room]").forEach(b=>b.onclick=()=>openRoom(b.dataset.room))}
+function openRoom(room){currentRoom=room;currentRoomObject=null;$("roomTitle").textContent=room;renderRoomObjects();show("roomObjects")}
+function showCurrentRoom(){if(currentRoom)openRoom(currentRoom);else showRoomHome()}
+function renderRoomObjects(){let objects=currentRoom==="Badkamer"?bathroomObjects:[];$("objectGrid").innerHTML=objects.map(o=>`<button class="object-card" data-room-object="${o.id}"><strong>${o.icon} ${o.label}</strong><span>${o.mode==="card"||o.mode==="expertPreset"?"Opent bestaande expertkaart":o.mode==="generic"?"Kies daarna de waarneming":"Meer keuzes"}</span></button>`).join("");document.querySelectorAll("[data-room-object]").forEach(b=>b.onclick=()=>selectRoomObject(b.dataset.roomObject))}
+function selectRoomObject(id){let o=bathroomObjects.find(x=>x.id===id);currentRoomObject=o;if(o.mode==="card")openCard(o.card,{roomContext:true});else if(o.mode==="expertPreset")openCard(o.card,{roomContext:true,preset:o.preset});else if(o.mode==="generic")showGenericRoomChoices(o);else if(o.mode==="choices")showRoomCardChoices(o);else{show("start");renderList()}}
+function showGenericRoomChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=D.observations.filter(x=>x.cardType==="registration").map(x=>`<button data-room-choice="${x.id}">${x.name}<span class="small">Registratiekaart</span></button>`).join("");document.querySelectorAll("[data-room-choice]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomChoice,{roomContext:true,genericObject:o.objectId})) ;show("roomObjectChoices")}
+function showRoomCardChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=o.cards.map(id=>{let c=D.observations.find(x=>x.id===id);return `<button data-room-card="${id}">${c?.name||id}<span class="small">Expertkaart</span></button>`}).join("");document.querySelectorAll("[data-room-card]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomCard,{roomContext:true}));show("roomObjectChoices")}
+function backFromCard(){if(viewMode==="rooms"&&currentRoomObject){if(currentRoomObject.mode==="generic"||currentRoomObject.mode==="choices")selectRoomObject(currentRoomObject.id);else showCurrentRoom()}else goHome()}
 function renderList(){let q=$("search").value.toLowerCase(),h="";[...new Set(D.observations.map(x=>x.category))].forEach(c=>{let a=D.observations.filter(x=>x.category===c&&x.name.toLowerCase().includes(q)&&(x.id!=="installatie_videofoon"||v("projectType")==="Appartement"));if(!a.length)return;h+=`<div class="group">${c}</div>`;a.forEach(x=>h+=`<button data-id="${x.id}">${x.name}<span class="small">${x.cardType==="expert"?"Expertkaart":"Registratiekaart"}</span></button>`)});$("list").innerHTML=h;document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCard(b.dataset.id))}
 function fillRegistration(){let objects=current?.id==="manco"?D.objects.filter(x=>x.id!=="installatie"):D.objects;$("object").innerHTML=objects.map(x=>`<option value="${x.id}">${x.name}</option>`).join("");objectChanged();}
 function objectChanged(){let o=D.objects.find(x=>x.id===$("object").value);$("type").innerHTML=o.types.map(x=>`<option>${x}</option>`).join("");typeChanged()}
 function typeChanged(){let o=D.objects.find(x=>x.id===$("object").value),p=o.partsByType?o.partsByType[$("type").value]:o.parts;$("part").innerHTML=p.map(x=>`<option>${x}</option>`).join("");$("location").innerHTML=locOpts();render()}
-function openCard(id){current=D.observations.find(x=>x.id===id);$("cardTitle").textContent=current.name;$("cardType").textContent=current.cardType==="expert"?"Expertkaart":"Registratiekaart";$("registrationFields").classList.toggle("hidden",current.cardType==="expert");$("microLocationWrap").classList.toggle("hidden",id!=="lakbeschadiging");$("microLocation").value="Niet gespecificeerd";$("expert").innerHTML="";if(current.cardType==="registration")fillRegistration();else buildExpert(id);show("form");render()}
+function openCard(id,opts={}){current=D.observations.find(x=>x.id===id);$("cardTitle").textContent=current.name;$("cardType").textContent=current.cardType==="expert"?"Expertkaart":"Registratiekaart";$("registrationFields").classList.toggle("hidden",current.cardType==="expert");$("microLocationWrap").classList.toggle("hidden",id!=="lakbeschadiging");$("microLocation").value="Niet gespecificeerd";$("expert").innerHTML="";if(current.cardType==="registration"){fillRegistration();if(opts.genericObject&&$("object")){$("object").value=opts.genericObject;objectChanged()}if(currentRoom&&$("location"))$("location").value=currentRoom}else{buildExpert(id);if(currentRoom&&$("eLoc")&&[...$("eLoc").options].some(x=>x.value===currentRoom))$("eLoc").value=currentRoom;if(currentRoom&&$("sanRoom")&&[...$("sanRoom").options].some(x=>x.value===currentRoom))$("sanRoom").value=currentRoom;if(opts.preset)Object.entries(opts.preset).forEach(([key,val])=>{if($(key)){$(key).value=val;if(key==="instSystem"&&typeof updateElectricalFields==="function")updateElectricalFields()}})}show("form");render()}
 const field=(id,label,html)=>`<label>${label}${html.startsWith("<select")?html.replace("<select",`<select id="${id}"`):html.replace("<input",`<input id="${id}"`)}</label>`;
 const select=(opts)=>`<select>${opts.map(x=>`<option>${x}</option>`).join("")}</select>`;
 const input=(type,value,step="1")=>`<input type="${type}" value="${value}" step="${step}">`;
@@ -180,4 +223,4 @@ function registrationResult(){let o=D.objects.find(x=>x.id===$("object").value),
 function render(){if(!current)return;let r=current.cardType==="expert"?expertResult():registrationResult();r=applyVve(r);let e=v("extra").trim(),pa=v("projectAgreement").trim();$("titleOut").textContent=r.title;$("descOut").textContent=r.desc+(pa?`\nProjectspecifieke afspraak / meerwerk: ${pa}`:"")+(e?`\nAanvullende toelichting inspecteur: ${e}`:"");$("adviceOut").textContent=`KOMPAS-advies: ${r.q}.`;if(current.cardType==="expert"){$("assessment").className=`note ${r.q==="Opleverpunt"?"bad":"ok"}`;$("assessment").textContent=`KOMPAS-inschatting: ${r.q}.`;r.k.forEach((x,i)=>$("know"+i).textContent=x)}let warn=current.id==="lakbeschadiging"&&["Scharnier","Deurbeslag","Slot","Cilinder","Rubber","Beglazing"].includes(v("part"))?"Gebruik hier waarschijnlijk ‘Beschadiging’ in plaats van ‘Lakbeschadiging’.":"";$("warning").classList.toggle("hidden",!warn);$("warning").textContent=warn}
 async function copy(id){try{await navigator.clipboard.writeText($(id).textContent);alert("Gekopieerd.")}catch{alert("Kopiëren lukte niet.")}}
 function logEntry(){let note=prompt("Wat klopt niet of wat ontbreekt?");if(!note)return;let text=$("logText").value+`\n---\nDatum: ${new Date().toLocaleString("nl-NL")}\nKaart: ${current.name}\nTitel: ${$("titleOut").textContent}\nOpmerking: ${note}\n`;$("logText").value=text;localStorage.setItem("kompas-logbook",text);alert("Toegevoegd aan het KOMPAS-logboek.")}
-$("version").textContent=D.meta.version;$("subtitle").textContent=D.meta.subtitle;$("projectType").value=localStorage.getItem("kompas-projecttype")||"Grondgebonden";$("projectType").onchange=()=>{localStorage.setItem("kompas-projecttype",v("projectType"));render();renderList()};$("search").oninput=renderList;$("object").onchange=objectChanged;$("type").onchange=typeChanged;$("part").onchange=render;$("location").onchange=render;$("microLocation").onchange=render;$("projectAgreement").oninput=render;$("extra").oninput=render;document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copy(b.dataset.copy));$("quickLog").onclick=logEntry;$("logText").value=localStorage.getItem("kompas-logbook")||"";$("logText").oninput=()=>localStorage.setItem("kompas-logbook",$("logText").value);$("downloadLog").onclick=()=>{let a=document.createElement("a"),blob=new Blob([$ ("logText").value],{type:"text/plain"});a.href=URL.createObjectURL(blob);a.download="KOMPAS_logboek.txt";a.click()};renderList();
+$("version").textContent=D.meta.version;$("subtitle").textContent=D.meta.subtitle;$("projectType").value=localStorage.getItem("kompas-projecttype")||"Grondgebonden";$("projectType").onchange=()=>{localStorage.setItem("kompas-projecttype",v("projectType"));render();renderList()};document.querySelectorAll('input[name="viewMode"]').forEach(r=>r.onchange=()=>{viewMode=getViewMode();localStorage.setItem("kompas-viewmode",viewMode);goHome()});let storedMode=localStorage.getItem("kompas-viewmode")||"rooms";let modeRadio=document.querySelector(`input[name="viewMode"][value="${storedMode}"]`);if(modeRadio)modeRadio.checked=true;viewMode=storedMode;$("search").oninput=renderList;$("object").onchange=objectChanged;$("type").onchange=typeChanged;$("part").onchange=render;$("location").onchange=render;$("microLocation").onchange=render;$("projectAgreement").oninput=render;$("extra").oninput=render;document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copy(b.dataset.copy));$("quickLog").onclick=logEntry;$("logText").value=localStorage.getItem("kompas-logbook")||"";$("logText").oninput=()=>localStorage.setItem("kompas-logbook",$("logText").value);$("downloadLog").onclick=()=>{let a=document.createElement("a"),blob=new Blob([$ ("logText").value],{type:"text/plain"});a.href=URL.createObjectURL(blob);a.download="KOMPAS_logboek.txt";a.click()};goHome();

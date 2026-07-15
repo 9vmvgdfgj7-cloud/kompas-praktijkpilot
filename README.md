@@ -1,8 +1,15 @@
-# KOMPAS Core v2.7.5 – S-001 Toilet
+# KOMPAS Next v2.8 BETA
 
-Alleen kaart S-001 is gewijzigd.
+Eerste proefopstelling van ruimtegestuurd inspecteren.
 
-## Hersteld
-- Per toilet-onderdeel worden alleen logische waarnemingen getoond.
-- `Kit ontbreekt` kan alleen nog bij `Kitwerk` worden gekozen.
-- Onlogische combinaties zoals `Kit ontbreekt – Toiletbril` zijn verwijderd.
+## Beschikbaar
+- Ruimteweergave met badkamer als pilot.
+- Klassieke weergave blijft beschikbaar.
+- Vanuit badkamer direct naar bestaande kaarten:
+  deur, kozijn, wand, plafond, vloer, tegelwerk, douche, wastafel,
+  bad, toilet, designradiator, ventilatie, schakelaar en wandcontactdoos.
+- Ruimte `Badkamer` wordt waar mogelijk automatisch ingevuld.
+- Terugknoppen brengen je terug naar de badkamer.
+
+## Niet gewijzigd
+De bestaande kaartinhoud en vaktechnische logica zijn behouden.
