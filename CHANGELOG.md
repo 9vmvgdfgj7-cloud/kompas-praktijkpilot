@@ -1,8 +1,9 @@
 # Changelog
 
-## KOMPAS Next v2.8 BETA
-- Nieuwe ruimteweergave toegevoegd.
-- Badkamer als eerste testbare ruimte.
-- Klassieke weergave behouden.
-- Bestaande kaarten gekoppeld aan badkamerobjecten.
-- Contextuele terugnavigatie toegevoegd.
+## v2.8.1
+Badkamer Refactor 1.0:
+- contextvelden verborgen;
+- wastafelcontext verfijnd;
+- fonteinkeuze uit badkamer verwijderd;
+- voegwerk douche verfijnd;
+- technische kaartnamen in ruimteweergave teruggedrongen.

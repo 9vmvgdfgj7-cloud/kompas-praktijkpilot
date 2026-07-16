@@ -1,4 +1,4 @@
-const D=window.KOMPAS_DATA,$=id=>document.getElementById(id);let current=null,currentRoom=null,currentRoomObject=null,viewMode="rooms";
+const D=window.KOMPAS_DATA,$=id=>document.getElementById(id);let current=null,currentRoom=null,currentRoomObject=null,viewMode="rooms",roomContextActive=false;
 const locOpts=()=>D.locations.map(x=>`<option>${x}</option>`).join("");
 const allPanels=["roomHome","roomObjects","roomObjectChoices","start","form","log"];
 const roomDefinitions=[
@@ -23,33 +23,38 @@ const bathroomObjects=[
 {id:"vloer",label:"Vloer",icon:"◻️",mode:"generic",objectId:"vloer"},
 {id:"tegelwerk",label:"Tegelwerk",icon:"🔲",mode:"choices",cards:["hoogteverschil_tegelwerk","hol_klinkende_tegel"]},
 {id:"douche",label:"Douche",icon:"🚿",mode:"card",card:"sanitair_douche"},
-{id:"wastafel",label:"Wastafel / fontein",icon:"🚰",mode:"card",card:"sanitair_wastafel"},
+{id:"wastafel",label:"Wastafel",icon:"🚰",mode:"card",card:"sanitair_wastafel",displayTitle:"Wastafel"},
 {id:"bad",label:"Bad",icon:"🛁",mode:"card",card:"sanitair_bad"},
 {id:"toilet",label:"Toilet",icon:"🚽",mode:"card",card:"sanitair_toilet"},
 {id:"designradiator",label:"Designradiator",icon:"🔥",mode:"card",card:"installatie_designradiator"},
 {id:"ventilatie",label:"Ventiel / ventilatie",icon:"🌬",mode:"card",card:"installatie_ventilatie"},
-{id:"schakelaar",label:"Schakelaar",icon:"💡",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Schakelaar"}},
-{id:"wcd",label:"Wandcontactdoos",icon:"🔌",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Wandcontactdoos"}},
+{id:"schakelaar",label:"Schakelaar",icon:"💡",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Schakelaar"},displayTitle:"Schakelaar"},
+{id:"wcd",label:"Wandcontactdoos",icon:"🔌",mode:"expertPreset",card:"installatie_elektra",preset:{instSystem:"Wandcontactdoos"},displayTitle:"Wandcontactdoos"},
 {id:"overig",label:"Overig object",icon:"➕",mode:"classic"}
 ];
 function show(id){allPanels.forEach(x=>$(x)?.classList.toggle("hidden",x!==id));if(id==="start")renderList()}
 function getViewMode(){return document.querySelector('input[name="viewMode"]:checked')?.value||"rooms"}
-function goHome(){viewMode=getViewMode();if(viewMode==="classic"){show("start");renderList()}else showRoomHome()}
+function goHome(){roomContextActive=false;["location","eLoc","sanRoom","object","wastafelUitvoering"].forEach(id=>setFieldVisibility(id,true));viewMode=getViewMode();if(viewMode==="classic"){show("start");renderList()}else showRoomHome()}
 function resetAll(){current=null;currentRoomObject=null;$("search").value="";$("extra").value="";$("projectAgreement").value="";goHome()}
 function showRoomHome(){currentRoom=null;currentRoomObject=null;renderRooms();show("roomHome")}
 function renderRooms(){$("roomGrid").innerHTML=roomDefinitions.map(r=>`<button class="room-card ${r.enabled?"active":"disabled"}" data-room="${r.id}" ${r.enabled?"":"disabled"}><strong>${r.icon} ${r.label}</strong><span>${r.enabled?"Beschikbaar om te testen":"Volgt na de badkamerpilot"}</span></button>`).join("");document.querySelectorAll("[data-room]").forEach(b=>b.onclick=()=>openRoom(b.dataset.room))}
 function openRoom(room){currentRoom=room;currentRoomObject=null;$("roomTitle").textContent=room;renderRoomObjects();show("roomObjects")}
 function showCurrentRoom(){if(currentRoom)openRoom(currentRoom);else showRoomHome()}
 function renderRoomObjects(){let objects=currentRoom==="Badkamer"?bathroomObjects:[];$("objectGrid").innerHTML=objects.map(o=>`<button class="object-card" data-room-object="${o.id}"><strong>${o.icon} ${o.label}</strong><span>${o.mode==="card"||o.mode==="expertPreset"?"Opent bestaande expertkaart":o.mode==="generic"?"Kies daarna de waarneming":"Meer keuzes"}</span></button>`).join("");document.querySelectorAll("[data-room-object]").forEach(b=>b.onclick=()=>selectRoomObject(b.dataset.roomObject))}
-function selectRoomObject(id){let o=bathroomObjects.find(x=>x.id===id);currentRoomObject=o;if(o.mode==="card")openCard(o.card,{roomContext:true});else if(o.mode==="expertPreset")openCard(o.card,{roomContext:true,preset:o.preset});else if(o.mode==="generic")showGenericRoomChoices(o);else if(o.mode==="choices")showRoomCardChoices(o);else{show("start");renderList()}}
-function showGenericRoomChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=D.observations.filter(x=>x.cardType==="registration").map(x=>`<button data-room-choice="${x.id}">${x.name}<span class="small">Registratiekaart</span></button>`).join("");document.querySelectorAll("[data-room-choice]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomChoice,{roomContext:true,genericObject:o.objectId})) ;show("roomObjectChoices")}
+function selectRoomObject(id){let o=bathroomObjects.find(x=>x.id===id);currentRoomObject=o;if(o.mode==="card")openCard(o.card,{roomContext:true,displayTitle:o.displayTitle||o.label});else if(o.mode==="expertPreset")openCard(o.card,{roomContext:true,preset:o.preset,displayTitle:o.displayTitle||o.label});else if(o.mode==="generic")showGenericRoomChoices(o);else if(o.mode==="choices")showRoomCardChoices(o);else{show("start");renderList()}}
+function showGenericRoomChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=D.observations.filter(x=>x.cardType==="registration").map(x=>`<button data-room-choice="${x.id}">${x.name}<span class="small">Registratiekaart</span></button>`).join("");document.querySelectorAll("[data-room-choice]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomChoice,{roomContext:true,genericObject:o.objectId,displayTitle:`${D.observations.find(x=>x.id===b.dataset.roomChoice)?.name||""} – ${o.label}`})) ;show("roomObjectChoices")}
 function showRoomCardChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=o.cards.map(id=>{let c=D.observations.find(x=>x.id===id);return `<button data-room-card="${id}">${c?.name||id}<span class="small">Expertkaart</span></button>`}).join("");document.querySelectorAll("[data-room-card]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomCard,{roomContext:true}));show("roomObjectChoices")}
 function backFromCard(){if(viewMode==="rooms"&&currentRoomObject){if(currentRoomObject.mode==="generic"||currentRoomObject.mode==="choices")selectRoomObject(currentRoomObject.id);else showCurrentRoom()}else goHome()}
 function renderList(){let q=$("search").value.toLowerCase(),h="";[...new Set(D.observations.map(x=>x.category))].forEach(c=>{let a=D.observations.filter(x=>x.category===c&&x.name.toLowerCase().includes(q)&&(x.id!=="installatie_videofoon"||v("projectType")==="Appartement"));if(!a.length)return;h+=`<div class="group">${c}</div>`;a.forEach(x=>h+=`<button data-id="${x.id}">${x.name}<span class="small">${x.cardType==="expert"?"Expertkaart":"Registratiekaart"}</span></button>`)});$("list").innerHTML=h;document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCard(b.dataset.id))}
 function fillRegistration(){let objects=current?.id==="manco"?D.objects.filter(x=>x.id!=="installatie"):D.objects;$("object").innerHTML=objects.map(x=>`<option value="${x.id}">${x.name}</option>`).join("");objectChanged();}
 function objectChanged(){let o=D.objects.find(x=>x.id===$("object").value);$("type").innerHTML=o.types.map(x=>`<option>${x}</option>`).join("");typeChanged()}
 function typeChanged(){let o=D.objects.find(x=>x.id===$("object").value),p=o.partsByType?o.partsByType[$("type").value]:o.parts;$("part").innerHTML=p.map(x=>`<option>${x}</option>`).join("");$("location").innerHTML=locOpts();render()}
-function openCard(id,opts={}){current=D.observations.find(x=>x.id===id);$("cardTitle").textContent=current.name;$("cardType").textContent=current.cardType==="expert"?"Expertkaart":"Registratiekaart";$("registrationFields").classList.toggle("hidden",current.cardType==="expert");$("microLocationWrap").classList.toggle("hidden",id!=="lakbeschadiging");$("microLocation").value="Niet gespecificeerd";$("expert").innerHTML="";if(current.cardType==="registration"){fillRegistration();if(opts.genericObject&&$("object")){$("object").value=opts.genericObject;objectChanged()}if(currentRoom&&$("location"))$("location").value=currentRoom}else{buildExpert(id);if(currentRoom&&$("eLoc")&&[...$("eLoc").options].some(x=>x.value===currentRoom))$("eLoc").value=currentRoom;if(currentRoom&&$("sanRoom")&&[...$("sanRoom").options].some(x=>x.value===currentRoom))$("sanRoom").value=currentRoom;if(opts.preset)Object.entries(opts.preset).forEach(([key,val])=>{if($(key)){$(key).value=val;if(key==="instSystem"&&typeof updateElectricalFields==="function")updateElectricalFields()}})}show("form");render()}
+function setFieldVisibility(id,visible){let el=$(id);if(el?.closest("label"))el.closest("label").classList.toggle("hidden",!visible)}
+function applyRoomContext(opts={}){roomContextActive=!!opts.roomContext;["location","eLoc","sanRoom"].forEach(id=>setFieldVisibility(id,!roomContextActive));if(roomContextActive&&opts.genericObject)setFieldVisibility("object",false)}
+function openCard(id,opts={}){current=D.observations.find(x=>x.id===id);roomContextActive=!!opts.roomContext;$("cardTitle").textContent=opts.displayTitle||current.name;$("cardType").textContent=current.cardType==="expert"?"Expertkaart":"Registratiekaart";$("registrationFields").classList.toggle("hidden",current.cardType==="expert");$("microLocationWrap").classList.toggle("hidden",id!=="lakbeschadiging");$("microLocation").value="Niet gespecificeerd";$("expert").innerHTML="";
+if(current.cardType==="registration"){fillRegistration();if(opts.genericObject&&$("object")){$("object").value=opts.genericObject;objectChanged()}if(currentRoom&&$("location"))$("location").value=currentRoom}
+else{buildExpert(id);if(currentRoom&&$("eLoc")&&[...$("eLoc").options].some(x=>x.value===currentRoom))$("eLoc").value=currentRoom;if(currentRoom&&$("sanRoom")&&[...$("sanRoom").options].some(x=>x.value===currentRoom))$("sanRoom").value=currentRoom;if(opts.preset)Object.entries(opts.preset).forEach(([key,val])=>{if($(key)){$(key).value=val;if(key==="instSystem"&&typeof updateElectricalFields==="function")updateElectricalFields()}})}
+applyRoomContext(opts);show("form");render()}
 const field=(id,label,html)=>`<label>${label}${html.startsWith("<select")?html.replace("<select",`<select id="${id}"`):html.replace("<input",`<input id="${id}"`)}</label>`;
 const select=(opts)=>`<select>${opts.map(x=>`<option>${x}</option>`).join("")}</select>`;
 const input=(type,value,step="1")=>`<input type="${type}" value="${value}" step="${step}">`;
@@ -80,19 +85,20 @@ field("toiletMorework","Hoogte conform meerwerk",select(["Niet van toepassing","
 field("checkFlush","Spoeling gecontroleerd?",select(["Ja","Nee"]))+
 field("checkStable","Toiletpot stabiel?",select(["Ja","Nee"])));updateToiletIssues();$("sanPart").onchange=()=>{updateToiletIssues();render()}}
 
-if(id==="sanitair_wastafel"){shell("S-002","Wastafel / fontein",
-field("sanRoom","Ruimte",select(["Badkamer","Toilet"]))+
-field("sanPart","Onderdeel",select(["Wastafel","Fontein","Badmeubel","Lade links","Lade rechts","Front","Greep","Spiegel","Spiegelkast","Kraan","Afvoer","Overloop","Aansluiting","Kitwerk"]))+
+if(id==="sanitair_wastafel"){shell("S-002","Wastafel",
+field("sanRoom","Ruimte",select(["Badkamer"]))+
+field("sanPart","Object / onderdeel",select(["Wastafel","Badmeubel","Lade links","Lade rechts","Front","Greep","Spiegel","Spiegelkast","Wastafelkraan","Afvoer","Overloop"]))+
+field("wastafelUitvoering","Uitvoering wastafel",select(["Vrijhangend","Op badmeubel"]))+
 field("sanIssue","Waarneming",select(["Beschadigd"]))+
 field("checkWater","Waterloop gecontroleerd?",select(["Ja","Nee"]))+
-field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));updateSanitaryIssues();$("sanPart").onchange=()=>{updateSanitaryIssues();render()}}
+field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));updateWastafelIssues();$("sanPart").onchange=()=>{updateWastafelIssues();render()};$("wastafelUitvoering").onchange=()=>{updateWastafelIssues();render()}}
 
-if(id==="sanitair_douche")shell("S-003","Douche",
+if(id==="sanitair_douche"){shell("S-003","Douche",
 field("sanRoom","Ruimte",select(["Badkamer"]))+
-field("sanPart","Onderdeel",select(["Douchegoot","Drain","Douchewand","Beglazing","Beslag","Douchekraan","Afvoer","Kitwerk","Tegelwerk"]))+
-field("sanIssue","Waarneming",select(["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Lekt","Afvoer onvoldoende","Kit ontbreekt","Kit onderbroken","Afschot onvoldoende","Onvoldoende afgewerkt"]))+
+field("sanPart","Object / onderdeel",select(["Douchegoot","Drain","Douchewand","Beglazing","Beslag","Douchekraan","Afvoer","Kitwerk","Tegelwerk"]))+
+field("sanIssue","Waarneming",select(["Beschadigd"]))+
 field("checkWater","Waterloop gecontroleerd?",select(["Ja","Nee"]))+
-field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));
+field("checkDrain","Afvoer gecontroleerd?",select(["Ja","Nee"])));updateDoucheIssues();$("sanPart").onchange=()=>{updateDoucheIssues();render()}}
 
 if(id==="sanitair_bad")shell("S-004","Bad",
 field("sanRoom","Ruimte",select(["Badkamer"]))+
@@ -123,16 +129,8 @@ if(id==="installatie_wtw"){if(p==="WTW-unit")issues=["Beschadigd","Trillingen","
 if(id==="installatie_warmtepomp"){if(p==="Manometer broncircuit"||p==="Manometer verwarmingsinstallatie")issues=["Druk lager dan 1 bar","Druk hoger dan 2 bar","Beschadigd","Niet leesbaar"];else if(p==="Displaybeglazing")issues=["Gebarsten","Beschadigd"];else if(p==="Leidingisolatie")issues=["Ontbreekt","Onderbroken","Beschadigd"];else if(p==="Condensafvoer")issues=["Lekt","Niet aangesloten","Sluit niet aan","Verstopt"];else issues=["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Sluit niet aan","Werkt niet","Storing zichtbaar","Los aangebracht","Lekkage zichtbaar"]}
 if(id==="installatie_vloerverdeler"){if(p==="Manometer")issues=["Druk lager dan 1 bar","Druk hoger dan 2 bar","Beschadigd","Niet leesbaar"];else if(p==="Leidingen")issues=["Lekt","Zweet","Beschadigd","Niet aangesloten","Isolatie ontbreekt"];else issues=["Ontbreekt","Niet compleet","Beschadigd","Niet aangesloten","Werkt niet","Lekt","Los aangebracht"]}
 setOptions($("instIssue"),issues)}
-function updateSanitaryIssues(){if(current?.id!=="sanitair_wastafel"||!$("sanPart")||!$("sanIssue"))return;let p=v("sanPart"),issues;
-if(["Lade links","Lade rechts"].includes(p))issues=["Beschadigd","Loopt zwaar","Sluit niet","Scheef gemonteerd","Los gemonteerd"];
-else if(p==="Badmeubel")issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Onvoldoende afgewerkt"];
-else if(p==="Front")issues=["Beschadigd","Kras","Scheef gemonteerd","Los gemonteerd"];
-else if(p==="Greep")issues=["Beschadigd","Los","Ontbreekt"];
-else if(["Spiegel","Spiegelkast"].includes(p))issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet"];
-else if(["Afvoer","Overloop","Aansluiting"].includes(p))issues=["Ontbreekt","Niet compleet","Lekt","Afvoer verstopt","Onvoldoende afgewerkt"];
-else if(p==="Kitwerk")issues=["Kit ontbreekt","Kit onthecht","Onvoldoende afgewerkt"];
-else issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Werkt niet","Lekt","Onvoldoende afgewerkt"];
-setOptions($("sanIssue"),issues)}
+function updateWastafelIssues(){if(current?.id!=="sanitair_wastafel"||!$("sanPart")||!$("sanIssue"))return;let p=v("sanPart"),uitvoering=v("wastafelUitvoering"),issues;setFieldVisibility("wastafelUitvoering",p==="Wastafel");if(p==="Wastafel"){issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Lekt","Niet compleet"];if(uitvoering==="Op badmeubel")issues.push("Niet afgekit","Kitvoeg onthecht","Kitvoeg onvoldoende afgewerkt")}else if(["Lade links","Lade rechts"].includes(p))issues=["Beschadigd","Loopt zwaar","Sluit niet","Scheef gemonteerd","Los gemonteerd"];else if(p==="Badmeubel")issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Onvoldoende afgewerkt"];else if(p==="Front")issues=["Beschadigd","Kras","Scheef gemonteerd","Los gemonteerd"];else if(p==="Greep")issues=["Beschadigd","Los","Ontbreekt"];else if(["Spiegel","Spiegelkast"].includes(p))issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Sluit niet"];else if(p==="Wastafelkraan")issues=["Beschadigd","Los","Werkt niet","Druppelt","Lekt"];else if(["Afvoer","Overloop"].includes(p))issues=["Ontbreekt","Niet compleet","Lekt","Verstopt","Onvoldoende afgewerkt"];setOptions($("sanIssue"),issues)}
+function updateDoucheIssues(){if(current?.id!=="sanitair_douche"||!$("sanPart")||!$("sanIssue"))return;let p=v("sanPart"),issues;if(p==="Tegelwerk")issues=["Beschadigd","Hoogteverschil","Voeg ontbreekt","Voeg beschadigd","Voeg onvoldoende gevuld","Voeg uitgespoeld"];else if(p==="Kitwerk")issues=["Kit ontbreekt","Kit onderbroken","Kit onthecht","Kit onvoldoende afgewerkt"];else if(["Douchegoot","Drain"].includes(p))issues=["Beschadigd","Los","Scheef gemonteerd","Niet compleet","Ontbreekt","Lekt","Afvoer onvoldoende","Onvoldoende afgewerkt"];else if(p==="Douchewand")issues=["Beschadigd","Kras","Los","Scheef gemonteerd","Niet compleet","Sluit niet","Niet afgekit","Kitvoeg onthecht"];else if(p==="Beglazing")issues=["Beschadigd","Kras","Gebarsten"];else if(p==="Beslag")issues=["Beschadigd","Los","Ontbreekt","Werkt niet"];else if(p==="Douchekraan")issues=["Beschadigd","Los","Werkt niet","Druppelt","Lekt"];else if(p==="Afvoer")issues=["Lekt","Verstopt","Afvoer onvoldoende","Niet compleet"];setOptions($("sanIssue"),issues)}
 
 function updateDesignRadiatorIssues(){if(current?.id!=="installatie_designradiator"||!$("instPart")||!$("instIssue"))return;let p=v("instPart"),issues;
 if(p==="Radiator")issues=["Beschadigd","Los aangebracht","Scheef aangebracht","Werkt niet","Lekt"];
@@ -201,7 +199,15 @@ else desc=`${onderdeel} van de ${systeem.toLowerCase()} is${loc?` in ${loc.toLow
 let warning="";
 if(id==="installatie_warmtepomp")warning="Let op: controleer welke manometer wordt afgelezen. De manometer van het broncircuit hoort bij een afzonderlijk gesloten circuit met een ander medium en mag niet als de waterinstallatie van de woning worden bijgevuld.";
 k=["Installaties en installatieonderdelen dienen compleet, deugdelijk gemonteerd en passend aangesloten te zijn overeenkomstig de projectspecificatie en de verwerkingsvoorschriften van de fabrikant.","Projectspecifieke technische omschrijving, installatietekeningen, productdocumentatie en verwerkingsvoorschriften van de fabrikant.",`De waarneming ‘${waarneming.toLowerCase()}’ betreft een zichtbare afwijking, ontbrekend onderdeel of functieverlies van de installatie.`,"Beschrijf uitsluitend wat zichtbaar of functioneel is vastgesteld. Doe geen uitspraak over de oorzaak of herstelwijze.",warning||"Controleer locatie, onderdeel, aansluiting en zichtbare werking."];}
-if(id.startsWith("sanitair_")){q="Opleverpunt";let room=v("sanRoom"),part=v("sanPart"),issue=v("sanIssue");title=`${q} - ${issue} - ${part} - ${room}`;if(issue==="Ontbreekt")desc=`${part} ontbreekt in ${room.toLowerCase()}.`;else if(issue==="Beschadigd")desc=`Beschadiging aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kras")desc=`Kras aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Los")desc=`${part} zit los in ${room.toLowerCase()}.`;else if(issue==="Scheef gemonteerd")desc=`${part} is scheef gemonteerd in ${room.toLowerCase()}.`;else if(issue==="Niet compleet")desc=`${part} is niet compleet in ${room.toLowerCase()}.`;else if(issue==="Lekt")desc=`Lekkage vastgesteld bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Druppelt")desc=`De ${part.toLowerCase()} in ${room.toLowerCase()} druppelt.`;else if(issue==="Werkt niet")desc=`${part} in ${room.toLowerCase()} functioneert niet.`;else if(issue==="Spoelt niet goed")desc=`De toiletpot in ${room.toLowerCase()} spoelt niet goed door.`;else if(issue==="Afvoer onvoldoende")desc=`De afvoer van ${part.toLowerCase()} in ${room.toLowerCase()} functioneert onvoldoende.`;else if(id==="sanitair_toilet"&&part==="Kitwerk"&&issue==="Kit ontbreekt")desc=`De kitvoeg ter plaatse van de toiletpot in ${room.toLowerCase()} ontbreekt.`;
+if(id.startsWith("sanitair_")){q="Opleverpunt";let room=v("sanRoom"),part=v("sanPart"),issue=v("sanIssue");title=`${q} - ${issue} - ${part} - ${room}`;
+if(id==="sanitair_wastafel"&&part==="Wastafel"&&issue==="Niet afgekit")desc=`De wastafel op het badmeubel in de badkamer is niet afgekit.`;
+else if(id==="sanitair_wastafel"&&part==="Wastafel"&&issue==="Kitvoeg onthecht")desc=`De kitvoeg tussen de wastafel en het badmeubel in de badkamer is onthecht.`;
+else if(id==="sanitair_wastafel"&&part==="Wastafel"&&issue==="Kitvoeg onvoldoende afgewerkt")desc=`De kitvoeg tussen de wastafel en het badmeubel in de badkamer is onvoldoende afgewerkt.`;
+else if(id==="sanitair_douche"&&part==="Tegelwerk"&&issue==="Voeg ontbreekt")desc=`Voegwerk ontbreekt plaatselijk aan het tegelwerk in de badkamer.`;
+else if(id==="sanitair_douche"&&part==="Tegelwerk"&&issue==="Voeg beschadigd")desc=`Beschadiging aan het voegwerk van het tegelwerk in de badkamer.`;
+else if(id==="sanitair_douche"&&part==="Tegelwerk"&&issue==="Voeg onvoldoende gevuld")desc=`Het voegwerk van het tegelwerk in de badkamer is plaatselijk onvoldoende gevuld.`;
+else if(id==="sanitair_douche"&&part==="Tegelwerk"&&issue==="Voeg uitgespoeld")desc=`Het voegwerk van het tegelwerk in de badkamer is plaatselijk uitgespoeld.`;
+else if(issue==="Ontbreekt")desc=`${part} ontbreekt in ${room.toLowerCase()}.`;else if(issue==="Beschadigd")desc=`Beschadiging aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Kras")desc=`Kras aan ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Los")desc=`${part} zit los in ${room.toLowerCase()}.`;else if(issue==="Scheef gemonteerd")desc=`${part} is scheef gemonteerd in ${room.toLowerCase()}.`;else if(issue==="Niet compleet")desc=`${part} is niet compleet in ${room.toLowerCase()}.`;else if(issue==="Lekt")desc=`Lekkage vastgesteld bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;else if(issue==="Druppelt")desc=`De ${part.toLowerCase()} in ${room.toLowerCase()} druppelt.`;else if(issue==="Werkt niet")desc=`${part} in ${room.toLowerCase()} functioneert niet.`;else if(issue==="Spoelt niet goed")desc=`De toiletpot in ${room.toLowerCase()} spoelt niet goed door.`;else if(issue==="Afvoer onvoldoende")desc=`De afvoer van ${part.toLowerCase()} in ${room.toLowerCase()} functioneert onvoldoende.`;else if(id==="sanitair_toilet"&&part==="Kitwerk"&&issue==="Kit ontbreekt")desc=`De kitvoeg ter plaatse van de toiletpot in ${room.toLowerCase()} ontbreekt.`;
 else if(id==="sanitair_toilet"&&part==="Kitwerk"&&issue==="Kit onthecht")desc=`De kitvoeg ter plaatse van de toiletpot in ${room.toLowerCase()} is onthecht.`;
 else if(id==="sanitair_toilet"&&part==="Kitwerk"&&issue==="Onvoldoende afgewerkt")desc=`De kitvoeg ter plaatse van de toiletpot in ${room.toLowerCase()} is onvoldoende afgewerkt.`;
 else if(issue==="Kit ontbreekt")desc=`Kitwerk ontbreekt bij ${part.toLowerCase()} in ${room.toLowerCase()}.`;
