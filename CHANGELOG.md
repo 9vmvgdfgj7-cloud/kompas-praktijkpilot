@@ -1,9 +1,7 @@
 # Changelog
 
-## v2.8.1
-Badkamer Refactor 1.0:
-- contextvelden verborgen;
-- wastafelcontext verfijnd;
-- fonteinkeuze uit badkamer verwijderd;
-- voegwerk douche verfijnd;
-- technische kaartnamen in ruimteweergave teruggedrongen.
+## BR-001 – gereed voor test
+- Logische beperking van de mancokaart.
+- Kitopties voor beide wastafeluitvoeringen.
+- Kitwerk rond bad verduidelijkt.
+- Zelfstandige badkamerkaart Kitwerk toegevoegd.
