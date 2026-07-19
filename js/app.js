@@ -21,7 +21,7 @@ const bathroomObjects=[
 {id:"wand",label:"Wand",icon:"⬜",mode:"generic",objectId:"wand"},
 {id:"plafond",label:"Plafond",icon:"⬜",mode:"generic",objectId:"plafond"},
 {id:"vloer",label:"Vloer",icon:"◻️",mode:"generic",objectId:"vloer"},
-{id:"tegelwerk",label:"Tegelwerk",icon:"🔲",mode:"discussionChoices",cards:[{id:"hoogteverschil_tegelwerk",label:"Hoogteverschil tegelwerk"},{id:"hol_klinkende_tegel",label:"Hol klinkende tegel"}]},
+{id:"tegelwerk",label:"Tegelwerk",icon:"🔲",mode:"mixedChoices",objectId:"tegelwerk",cards:[{id:"hoogteverschil_tegelwerk",label:"Hoogteverschil tegelwerk"},{id:"hol_klinkende_tegel",label:"Hol klinkende tegel"}],registrationIds:["beschadiging","smet","vervuiling","oneffenheid","gat","scheur","manco","niet_compleet","niet_afgemonteerd"]},
 {id:"douche",label:"Douche",icon:"🚿",mode:"card",card:"sanitair_douche"},
 {id:"wastafel",label:"Wastafel",icon:"🚰",mode:"card",card:"sanitair_wastafel",displayTitle:"Wastafel"},
 {id:"bad",label:"Bad",icon:"🛁",mode:"card",card:"sanitair_bad"},
@@ -42,10 +42,29 @@ function renderRooms(){$("roomGrid").innerHTML=roomDefinitions.map(r=>`<button c
 function openRoom(room){currentRoom=room;currentRoomObject=null;$("roomTitle").textContent=room;renderRoomObjects();show("roomObjects")}
 function showCurrentRoom(){if(currentRoom)openRoom(currentRoom);else showRoomHome()}
 function renderRoomObjects(){let objects=currentRoom==="Badkamer"?bathroomObjects:[];$("objectGrid").innerHTML=objects.map(o=>`<button class="object-card" data-room-object="${o.id}"><strong>${o.icon} ${o.label}</strong><span>${o.mode==="card"||o.mode==="expertPreset"?"Opent bestaande expertkaart":o.mode==="generic"?"Kies daarna de waarneming":"Meer keuzes"}</span></button>`).join("");document.querySelectorAll("[data-room-object]").forEach(b=>b.onclick=()=>selectRoomObject(b.dataset.roomObject))}
-function selectRoomObject(id){let o=bathroomObjects.find(x=>x.id===id);currentRoomObject=o;if(o.mode==="card")openCard(o.card,{roomContext:true,displayTitle:o.displayTitle||o.label});else if(o.mode==="expertPreset")openCard(o.card,{roomContext:true,preset:o.preset,displayTitle:o.displayTitle||o.label});else if(o.mode==="generic")showGenericRoomChoices(o);else if(o.mode==="choices"||o.mode==="discussionChoices")showRoomCardChoices(o);else{show("start");renderList()}}
+function selectRoomObject(id){let o=bathroomObjects.find(x=>x.id===id);currentRoomObject=o;if(o.mode==="card")openCard(o.card,{roomContext:true,displayTitle:o.displayTitle||o.label});else if(o.mode==="expertPreset")openCard(o.card,{roomContext:true,preset:o.preset,displayTitle:o.displayTitle||o.label});else if(o.mode==="generic")showGenericRoomChoices(o);else if(o.mode==="mixedChoices")showMixedRoomChoices(o);else if(o.mode==="choices"||o.mode==="discussionChoices")showRoomCardChoices(o);else{show("start");renderList()}}
 function showGenericRoomChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=D.observations.filter(x=>x.cardType==="registration").map(x=>`<button data-room-choice="${x.id}">${x.name}<span class="small">Registratiekaart</span></button>`).join("");document.querySelectorAll("[data-room-choice]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomChoice,{roomContext:true,genericObject:o.objectId,displayTitle:`${D.observations.find(x=>x.id===b.dataset.roomChoice)?.name||""} – ${o.label}`})) ;show("roomObjectChoices")}
+
+function showMixedRoomChoices(o){
+  $("objectChoiceTitle").textContent=o.label;
+  $("roomContextPill").textContent=currentRoom;
+  const discussion=o.cards.map(item=>{
+    const id=typeof item==="string"?item:item.id;
+    const c=D.observations.find(x=>x.id===id);
+    const label=typeof item==="string"?(c?.name||id):(item.label||c?.name||id);
+    return `<button class="discussion-card" data-room-card="${id}">${label}<span class="small">Discussiekaart</span></button>`;
+  }).join("");
+  const registrations=(o.registrationIds||[]).map(id=>D.observations.find(x=>x.id===id)).filter(Boolean).map(c=>
+    `<button data-room-registration="${c.id}">${c.name}<span class="small">Normale vastlegging</span></button>`
+  ).join("");
+  $("roomChoiceGrid").innerHTML=`<div class="choice-heading">Discussiekaarten</div>${discussion}<div class="choice-heading">Overige waarnemingen</div>${registrations}`;
+  document.querySelectorAll("[data-room-card]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomCard,{roomContext:true,displayTitle:D.observations.find(x=>x.id===b.dataset.roomCard)?.name}));
+  document.querySelectorAll("[data-room-registration]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomRegistration,{roomContext:true,genericObject:o.objectId,displayTitle:`${D.observations.find(x=>x.id===b.dataset.roomRegistration)?.name||""} – ${o.label}`}));
+  show("roomObjectChoices");
+}
+
 function showRoomCardChoices(o){$("objectChoiceTitle").textContent=o.label;$("roomContextPill").textContent=currentRoom;$("roomChoiceGrid").innerHTML=o.cards.map(item=>{let id=typeof item==="string"?item:item.id,c=D.observations.find(x=>x.id===id),label=typeof item==="string"?(c?.name||id):(item.label||c?.name||id),kind=o.mode==="discussionChoices"?"Discussiekaart":"Expertkaart";return `<button data-room-card="${id}">${label}<span class="small">${kind}</span></button>`}).join("");document.querySelectorAll("[data-room-card]").forEach(b=>b.onclick=()=>openCard(b.dataset.roomCard,{roomContext:true,displayTitle:D.observations.find(x=>x.id===b.dataset.roomCard)?.name}));show("roomObjectChoices")}
-function backFromCard(){if(viewMode==="rooms"&&currentRoomObject){if(currentRoomObject.mode==="generic"||currentRoomObject.mode==="choices"||currentRoomObject.mode==="discussionChoices")selectRoomObject(currentRoomObject.id);else showCurrentRoom()}else goHome()}
+function backFromCard(){if(viewMode==="rooms"&&currentRoomObject){if(currentRoomObject.mode==="generic"||currentRoomObject.mode==="mixedChoices"||currentRoomObject.mode==="choices"||currentRoomObject.mode==="discussionChoices")selectRoomObject(currentRoomObject.id);else showCurrentRoom()}else goHome()}
 function renderList(){let q=$("search").value.toLowerCase(),h="";[...new Set(D.observations.map(x=>x.category))].forEach(c=>{let a=D.observations.filter(x=>x.category===c&&x.name.toLowerCase().includes(q)&&(x.id!=="installatie_videofoon"||v("projectType")==="Appartement"));if(!a.length)return;h+=`<div class="group">${c}</div>`;a.forEach(x=>h+=`<button data-id="${x.id}">${x.name}<span class="small">${x.cardType==="expert"?"Expertkaart":"Registratiekaart"}</span></button>`)});$("list").innerHTML=h;document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCard(b.dataset.id))}
 function fillRegistration(){let objects=current?.id==="manco"?D.objects.filter(x=>!["installatie","wand","plafond","vloer"].includes(x.id)):D.objects;$("object").innerHTML=objects.map(x=>`<option value="${x.id}">${x.name}</option>`).join("");objectChanged();}
 function objectChanged(){let o=D.objects.find(x=>x.id===$("object").value);$("type").innerHTML=o.types.map(x=>`<option>${x}</option>`).join("");typeChanged()}
