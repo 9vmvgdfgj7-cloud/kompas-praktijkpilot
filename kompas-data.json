@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "version": "KOMPAS Next v2.8.2 BR-003",
+    "subtitle": "Badkamer Refactor – afschot douchevloer"
+  },
   "locations": [
     "Hal",
     "Meterkast",
@@ -22,149 +26,218 @@
     {
       "id": "lakbeschadiging",
       "name": "Lakbeschadiging",
-      "category": "Afwerking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "beschadiging",
       "name": "Beschadiging",
-      "category": "Beschadiging",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "smet",
       "name": "Smet",
-      "category": "Afwerking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "vervuiling",
       "name": "Vervuiling",
-      "category": "Afwerking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "schrale_dekking",
       "name": "Schrale dekking",
-      "category": "Afwerking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "oneffenheid",
       "name": "Oneffenheid",
-      "category": "Afwerking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "gat",
       "name": "Gat",
-      "category": "Materiaal",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "scheur",
       "name": "Scheur",
-      "category": "Materiaal",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "barst",
-      "name": "Barst",
-      "category": "Materiaal",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "manco",
       "name": "Manco",
-      "category": "Montage",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "niet_compleet",
       "name": "Niet compleet",
-      "category": "Montage",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "niet_afgemonteerd",
       "name": "Niet afgemonteerd",
-      "category": "Montage",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "los_onderdeel",
-      "name": "Los onderdeel",
-      "category": "Montage",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "sluit_niet_aan",
       "name": "Sluit niet aan",
-      "category": "Montage",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "open_voeg",
-      "name": "Open voeg",
-      "category": "Afdichting",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "kitonderbreking",
-      "name": "Kitonderbreking",
-      "category": "Afdichting",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "werkt_niet",
-      "name": "Werkt niet",
-      "category": "Werking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "sluit_niet",
-      "name": "Sluit niet",
-      "category": "Werking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "loopt_aan",
-      "name": "Loopt aan",
-      "category": "Werking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
-    },
-    {
-      "id": "klemt",
-      "name": "Klemt",
-      "category": "Werking",
-      "type": "registratie",
-      "advice": "Opleverpunt"
+      "category": "Registratiekaarten",
+      "cardType": "registration"
     },
     {
       "id": "beglazing_beschadigd",
       "name": "Beglazing beschadigd",
-      "category": "Discussiekaart",
-      "type": "discussie",
-      "advice": "KOMPAS-inschatting"
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "hol_klinkende_tegel",
+      "name": "Hol klinkende tegel",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "hoogteverschil_tegelwerk",
+      "name": "Hoogteverschil tegelwerk",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "afschot_douchevloer",
+      "name": "Afschot douchevloer",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "behangklare_wand",
+      "name": "Behangklare wand",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "spackwerk",
+      "name": "Spack-/spuitwerk",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "lakwerk",
+      "name": "Lakwerk",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "kitwerk",
+      "name": "Kitwerk",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_ventilatie",
+      "name": "Ventilatie",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_wtw",
+      "name": "WTW-unit",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_warmtepomp",
+      "name": "Warmtepomp",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_omvormer",
+      "name": "Omvormer zonnepanelen",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_rookmelder",
+      "name": "Rookmelder",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_elektra",
+      "name": "Elektra / groepenkast",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_toilet",
+      "name": "Toilet",
+      "category": "Sanitairkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_wastafel",
+      "name": "Wastafel / fontein",
+      "category": "Sanitairkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_douche",
+      "name": "Douche",
+      "category": "Sanitairkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_bad",
+      "name": "Bad",
+      "category": "Sanitairkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_kraan",
+      "name": "Kraan",
+      "category": "Sanitairkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_vloerverdeler",
+      "name": "Vloerverdeler",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_wasmachine",
+      "name": "Wasmachine-/drogeropstelling",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_designradiator",
+      "name": "Designradiator",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_videofoon",
+      "name": "Videofoon",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "installatie_loze_leiding",
+      "name": "Loze leiding",
+      "category": "Installatiekaarten",
+      "cardType": "expert"
     }
   ],
   "objects": [
@@ -261,50 +334,79 @@
       ]
     },
     {
-      "id": "beglazing",
-      "name": "Beglazing",
-      "types": [
-        "Meerbladig isolatieglas"
-      ],
-      "parts": [
-        "Beglazing"
-      ]
-    },
-    {
-      "id": "sanitair",
-      "name": "Sanitair",
-      "types": [
-        "Toilet",
-        "Fontein",
-        "Wastafel",
-        "Douche",
-        "Bad"
-      ],
-      "parts": [
-        "Toestel",
-        "Aansluiting",
-        "Afvoer",
-        "Kraan"
-      ]
-    },
-    {
       "id": "installatie",
       "name": "Installatie",
       "types": [
         "Ventilatie",
         "Rookmelder",
+        "WTW-unit",
+        "Warmtepomp",
+        "Omvormer zonnepanelen",
         "Elektra",
         "Verwarming",
         "Groepenkast",
         "Intercom"
       ],
-      "parts": [
-        "Ventiel",
-        "Rookmelder",
-        "Bediening",
-        "Afdekraam",
-        "Thermostaat"
-      ]
+      "partsByType": {
+        "Ventilatie": [
+          "Ventiel",
+          "Bediening",
+          "Kanaalaansluiting"
+        ],
+        "Rookmelder": [
+          "Rookmelder",
+          "Montagevoet"
+        ],
+        "WTW-unit": [
+          "Behuizing",
+          "Bediening",
+          "Filterdeksel",
+          "Condensaansluiting",
+          "Kanaalaansluiting",
+          "Ophanging"
+        ],
+        "Warmtepomp": [
+          "Binnenunit",
+          "Buitenunit",
+          "Behuizing",
+          "Display",
+          "Leidingen",
+          "Isolatie",
+          "Condensafvoer",
+          "Aansluiting"
+        ],
+        "Omvormer zonnepanelen": [
+          "Behuizing",
+          "Display",
+          "Bekabeling",
+          "Aansluiting",
+          "Montagebeugel"
+        ],
+        "Elektra": [
+          "Afdekraam",
+          "Wandcontactdoos",
+          "Schakelaar",
+          "Bekabeling"
+        ],
+        "Verwarming": [
+          "Thermostaat",
+          "Radiator",
+          "Vloerverwarming",
+          "Aansluiting"
+        ],
+        "Groepenkast": [
+          "Afdekplaat",
+          "Automaat",
+          "Aardlekschakelaar",
+          "Hoofdschakelaar",
+          "Label"
+        ],
+        "Intercom": [
+          "Binnenpost",
+          "Behuizing",
+          "Bediening"
+        ]
+      }
     },
     {
       "id": "keuken",
@@ -333,6 +435,34 @@
         "Trapboom",
         "Leuning",
         "Balustrade"
+      ]
+    },
+    {
+      "id": "gevel",
+      "name": "Gevel",
+      "types": [
+        "Metselwerk",
+        "Gevelbekleding",
+        "Gevelkozijn",
+        "Waterslag",
+        "Latei",
+        "Dorpel",
+        "Hemelwaterafvoer",
+        "Ventilatierooster"
+      ],
+      "parts": [
+        "Gevelvlak",
+        "Voegwerk",
+        "Dilatatie",
+        "Aansluiting",
+        "Bevestiging",
+        "Afwerking",
+        "Kozijnprofiel",
+        "Rooster",
+        "Waterslag",
+        "Latei",
+        "Dorpel",
+        "Hemelwaterafvoer"
       ]
     }
   ]

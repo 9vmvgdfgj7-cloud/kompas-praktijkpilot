@@ -1,7 +1,8 @@
 # Changelog
 
-## BR-002 – gereed voor test
-- `Hoogteverschil tegelwerk` toegevoegd onder Badkamer → Tegelwerk.
-- `Hol klinkende tegel` toegevoegd onder Badkamer → Tegelwerk.
-- Beide ingangen worden zichtbaar aangeduid als discussiekaart.
-- Geen inhoudelijke wijzigingen aan de kaarten.
+## BR-003 – Afschot douchevloer
+- Discussiekaart toegevoegd onder Badkamer → Tegelwerk.
+- Beoordeling met een beperkte hoeveelheid water, zonder vaste hoeveelheid.
+- Afschot en afvoercapaciteit worden afzonderlijk beoordeeld.
+- Feitelijke verslagtekst voor Ed Controls en HomeDNA.
+- Fotografische vastlegging; geen video-advies.

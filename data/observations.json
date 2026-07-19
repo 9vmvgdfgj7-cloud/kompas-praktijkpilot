@@ -2,148 +2,217 @@
   {
     "id": "lakbeschadiging",
     "name": "Lakbeschadiging",
-    "category": "Afwerking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "beschadiging",
     "name": "Beschadiging",
-    "category": "Beschadiging",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "smet",
     "name": "Smet",
-    "category": "Afwerking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "vervuiling",
     "name": "Vervuiling",
-    "category": "Afwerking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "schrale_dekking",
     "name": "Schrale dekking",
-    "category": "Afwerking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "oneffenheid",
     "name": "Oneffenheid",
-    "category": "Afwerking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "gat",
     "name": "Gat",
-    "category": "Materiaal",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "scheur",
     "name": "Scheur",
-    "category": "Materiaal",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "barst",
-    "name": "Barst",
-    "category": "Materiaal",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "manco",
     "name": "Manco",
-    "category": "Montage",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "niet_compleet",
     "name": "Niet compleet",
-    "category": "Montage",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "niet_afgemonteerd",
     "name": "Niet afgemonteerd",
-    "category": "Montage",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "los_onderdeel",
-    "name": "Los onderdeel",
-    "category": "Montage",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "sluit_niet_aan",
     "name": "Sluit niet aan",
-    "category": "Montage",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "open_voeg",
-    "name": "Open voeg",
-    "category": "Afdichting",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "kitonderbreking",
-    "name": "Kitonderbreking",
-    "category": "Afdichting",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "werkt_niet",
-    "name": "Werkt niet",
-    "category": "Werking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "sluit_niet",
-    "name": "Sluit niet",
-    "category": "Werking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "loopt_aan",
-    "name": "Loopt aan",
-    "category": "Werking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
-  },
-  {
-    "id": "klemt",
-    "name": "Klemt",
-    "category": "Werking",
-    "cardType": "registration",
-    "defaultAdvice": "Opleverpunt"
+    "category": "Registratiekaarten",
+    "cardType": "registration"
   },
   {
     "id": "beglazing_beschadigd",
     "name": "Beglazing beschadigd",
-    "category": "Discussiekaart",
-    "cardType": "discussion",
-    "defaultAdvice": "KOMPAS-inschatting"
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "hol_klinkende_tegel",
+    "name": "Hol klinkende tegel",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "hoogteverschil_tegelwerk",
+    "name": "Hoogteverschil tegelwerk",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "afschot_douchevloer",
+    "name": "Afschot douchevloer",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "behangklare_wand",
+    "name": "Behangklare wand",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "spackwerk",
+    "name": "Spack-/spuitwerk",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "lakwerk",
+    "name": "Lakwerk",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "kitwerk",
+    "name": "Kitwerk",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_ventilatie",
+    "name": "Ventilatie",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_wtw",
+    "name": "WTW-unit",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_warmtepomp",
+    "name": "Warmtepomp",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_omvormer",
+    "name": "Omvormer zonnepanelen",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_rookmelder",
+    "name": "Rookmelder",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_elektra",
+    "name": "Elektra / groepenkast",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_toilet",
+    "name": "Toilet",
+    "category": "Sanitairkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_wastafel",
+    "name": "Wastafel / fontein",
+    "category": "Sanitairkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_douche",
+    "name": "Douche",
+    "category": "Sanitairkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_bad",
+    "name": "Bad",
+    "category": "Sanitairkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_kraan",
+    "name": "Kraan",
+    "category": "Sanitairkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_vloerverdeler",
+    "name": "Vloerverdeler",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_wasmachine",
+    "name": "Wasmachine-/drogeropstelling",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_designradiator",
+    "name": "Designradiator",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_videofoon",
+    "name": "Videofoon",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_loze_leiding",
+    "name": "Loze leiding",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
   }
 ]
