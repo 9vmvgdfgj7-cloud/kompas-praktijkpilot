@@ -1,7 +1,8 @@
-# KOMPAS Next – BR-001 testbuild
+# KOMPAS BR-002 – Tegelwerk discussiekaarten
 
-Alleen verwerkt in deze build:
-- Manco: Wand, Plafond en Vloer verwijderd als onlogische objecten.
-- Wastafel: kitwaarnemingen ook beschikbaar bij een vrijhangende wastafel.
-- Bad: `Kitwerk` hernoemd naar `Kitwerk rond bad`.
-- Badkamer: zelfstandig object `Kitwerk` toegevoegd.
+Onder **Badkamer → Tegelwerk** zijn de twee bestaande discussiekaarten rechtstreeks bereikbaar:
+
+- Hoogteverschil tegelwerk
+- Hol klinkende tegel
+
+De inhoud en beslislogica van beide kaarten zijn ongewijzigd. Alleen de ingang vanuit de badkamer is toegevoegd en duidelijk als `Discussiekaart` herkenbaar gemaakt.

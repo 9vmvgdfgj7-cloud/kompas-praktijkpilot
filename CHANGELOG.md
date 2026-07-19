@@ -1,7 +1,7 @@
 # Changelog
 
-## BR-001 – gereed voor test
-- Logische beperking van de mancokaart.
-- Kitopties voor beide wastafeluitvoeringen.
-- Kitwerk rond bad verduidelijkt.
-- Zelfstandige badkamerkaart Kitwerk toegevoegd.
+## BR-002 – gereed voor test
+- `Hoogteverschil tegelwerk` toegevoegd onder Badkamer → Tegelwerk.
+- `Hol klinkende tegel` toegevoegd onder Badkamer → Tegelwerk.
+- Beide ingangen worden zichtbaar aangeduid als discussiekaart.
+- Geen inhoudelijke wijzigingen aan de kaarten.
