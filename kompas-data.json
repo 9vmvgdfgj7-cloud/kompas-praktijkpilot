@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "KOMPAS Next v2.8.2 BR-003",
-    "subtitle": "Badkamer Refactor – afschot douchevloer"
+    "version": "KOMPAS Next v2.9.0 T-001",
+    "subtitle": "Volledige toiletmodule – praktijktest"
   },
   "locations": [
     "Hal",
@@ -463,6 +463,22 @@
         "Latei",
         "Dorpel",
         "Hemelwaterafvoer"
+      ]
+    },
+    {
+      "id": "verlichting",
+      "name": "Verlichting",
+      "types": [
+        "Plafondlichtpunt",
+        "Wandlichtpunt",
+        "Armatuur"
+      ],
+      "parts": [
+        "Aansluiting",
+        "Centraaldoos",
+        "Afdekplaat",
+        "Armatuur",
+        "Bediening"
       ]
     }
   ]

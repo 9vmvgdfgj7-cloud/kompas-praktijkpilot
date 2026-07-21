@@ -221,5 +221,21 @@
       "Leuning",
       "Balustrade"
     ]
+  },
+  {
+    "id": "verlichting",
+    "name": "Verlichting",
+    "types": [
+      "Plafondlichtpunt",
+      "Wandlichtpunt",
+      "Armatuur"
+    ],
+    "parts": [
+      "Aansluiting",
+      "Centraaldoos",
+      "Afdekplaat",
+      "Armatuur",
+      "Bediening"
+    ]
   }
 ]
