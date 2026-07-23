@@ -163,7 +163,7 @@
   },
   {
     "id": "sanitair_wastafel",
-    "name": "Wastafel / fontein",
+    "name": "Wastafel",
     "category": "Sanitairkaarten",
     "cardType": "expert"
   },
@@ -213,6 +213,18 @@
     "id": "installatie_loze_leiding",
     "name": "Loze leiding",
     "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "dekvloer_stelkozijn",
+    "name": "Aansluiting dekvloer – stelkozijn",
+    "category": "Expertkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "sanitair_fontein",
+    "name": "Fontein",
+    "category": "Sanitairkaarten",
     "cardType": "expert"
   }
 ]

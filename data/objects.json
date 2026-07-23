@@ -153,12 +153,12 @@
       "Warmtepomp": [
         "Binnenunit",
         "Buitenunit",
-        "Behuizing",
-        "Display",
-        "Leidingen",
-        "Isolatie",
+        "Display / bediening",
+        "Bronleidingen",
+        "Aanvoer-/retourleidingen",
         "Condensafvoer",
-        "Aansluiting"
+        "Bevestiging",
+        "Doorvoeren"
       ],
       "Omvormer zonnepanelen": [
         "Behuizing",

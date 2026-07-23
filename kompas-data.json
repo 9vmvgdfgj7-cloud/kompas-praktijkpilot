@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "KOMPAS Next v2.9.0 T-001",
-    "subtitle": "Volledige toiletmodule – praktijktest"
+    "version": "KOMPAS Next v2.9.2 complete batch",
+    "subtitle": "S-003 Fontein · DV-001 Dekvloer–stelkozijn · TR-001 Warmtepomp"
   },
   "locations": [
     "Hal",
@@ -187,7 +187,7 @@
     },
     {
       "id": "sanitair_wastafel",
-      "name": "Wastafel / fontein",
+      "name": "Wastafel",
       "category": "Sanitairkaarten",
       "cardType": "expert"
     },
@@ -237,6 +237,18 @@
       "id": "installatie_loze_leiding",
       "name": "Loze leiding",
       "category": "Installatiekaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "dekvloer_stelkozijn",
+      "name": "Aansluiting dekvloer – stelkozijn",
+      "category": "Expertkaarten",
+      "cardType": "expert"
+    },
+    {
+      "id": "sanitair_fontein",
+      "name": "Fontein",
+      "category": "Sanitairkaarten",
       "cardType": "expert"
     }
   ],
@@ -334,6 +346,33 @@
       ]
     },
     {
+      "id": "beglazing",
+      "name": "Beglazing",
+      "types": [
+        "Meerbladig isolatieglas"
+      ],
+      "parts": [
+        "Beglazing"
+      ]
+    },
+    {
+      "id": "sanitair",
+      "name": "Sanitair",
+      "types": [
+        "Toilet",
+        "Fontein",
+        "Wastafel",
+        "Douche",
+        "Bad"
+      ],
+      "parts": [
+        "Toestel",
+        "Aansluiting",
+        "Afvoer",
+        "Kraan"
+      ]
+    },
+    {
       "id": "installatie",
       "name": "Installatie",
       "types": [
@@ -368,12 +407,12 @@
         "Warmtepomp": [
           "Binnenunit",
           "Buitenunit",
-          "Behuizing",
-          "Display",
-          "Leidingen",
-          "Isolatie",
+          "Display / bediening",
+          "Bronleidingen",
+          "Aanvoer-/retourleidingen",
           "Condensafvoer",
-          "Aansluiting"
+          "Bevestiging",
+          "Doorvoeren"
         ],
         "Omvormer zonnepanelen": [
           "Behuizing",
@@ -435,34 +474,6 @@
         "Trapboom",
         "Leuning",
         "Balustrade"
-      ]
-    },
-    {
-      "id": "gevel",
-      "name": "Gevel",
-      "types": [
-        "Metselwerk",
-        "Gevelbekleding",
-        "Gevelkozijn",
-        "Waterslag",
-        "Latei",
-        "Dorpel",
-        "Hemelwaterafvoer",
-        "Ventilatierooster"
-      ],
-      "parts": [
-        "Gevelvlak",
-        "Voegwerk",
-        "Dilatatie",
-        "Aansluiting",
-        "Bevestiging",
-        "Afwerking",
-        "Kozijnprofiel",
-        "Rooster",
-        "Waterslag",
-        "Latei",
-        "Dorpel",
-        "Hemelwaterafvoer"
       ]
     },
     {
