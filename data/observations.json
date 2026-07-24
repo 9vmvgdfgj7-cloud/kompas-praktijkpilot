@@ -232,5 +232,47 @@
     "name": "Scope opleveringsinspectie",
     "category": "KOMPAS-basiskaarten",
     "cardType": "expert"
+  },
+  {
+    "id": "installatie_boiler_buffervat",
+    "name": "Boilervat / buffervat",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_expansievat",
+    "name": "Expansievat",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_leidingwerk",
+    "name": "CV-/warmtepompleidingwerk",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_waterleidingen",
+    "name": "Waterleidingen",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_afvoeren",
+    "name": "Afvoeren / condensafvoeren",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_regeltechniek",
+    "name": "Regeltechniek",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_projectafhankelijk",
+    "name": "Projectafhankelijke installaties",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
   }
 ]

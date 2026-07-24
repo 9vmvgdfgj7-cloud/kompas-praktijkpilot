@@ -25,3 +25,11 @@
 - S-003 Fontein als zelfstandige sanitairkaart toegevoegd; wastafel en fontein zijn losgekoppeld.
 - DV-001 Aansluiting dekvloer – stelkozijn toegevoegd en gekoppeld aan Vloer in actieve ruimtes.
 - TR-001 Warmtepomp behouden en opgenomen in dezelfde testversie.
+
+
+## KOMPAS Next v2.9.4 – Technische ruimte compleet
+
+- TR-003 t/m TR-010 toegevoegd.
+- Vloerverdeler met keuze met pomp / zonder pomp.
+- Boilervat/buffervat, expansievat, leidingwerk, waterleidingen, afvoeren, regeltechniek en projectafhankelijke installaties toegevoegd.
+- Alle kaarten volgen KP-001: uitsluitend objectief waarneembare afwijkingen, zonder specialistische metingen of functionele beproeving.
