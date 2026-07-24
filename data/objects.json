@@ -130,15 +130,7 @@
       "Elektra",
       "Verwarming",
       "Groepenkast",
-      "Intercom",
-      "Vloerverdeler",
-      "Boilervat / buffervat",
-      "Expansievat",
-      "CV-/warmtepompleidingwerk",
-      "Waterleidingen",
-      "Afvoeren / condensafvoeren",
-      "Regeltechniek",
-      "Projectafhankelijke installaties"
+      "Intercom"
     ],
     "partsByType": {
       "Ventilatie": [
@@ -204,81 +196,6 @@
         "Binnenpost",
         "Behuizing",
         "Bediening"
-      ],
-      "Vloerverdeler": [
-        "Verdelerbalk",
-        "Groepen",
-        "Leidingaansluitingen",
-        "Afsluiters",
-        "Ontluchter",
-        "Vul-/aftapkraan",
-        "Bevestiging",
-        "Circulatiepomp",
-        "Pompaansluitingen",
-        "Regelunit / display"
-      ],
-      "Boilervat / buffervat": [
-        "Vat",
-        "Behuizing",
-        "Aansluitingen",
-        "Veiligheidsventiel",
-        "Temperatuur-/drukindicator",
-        "Bevestiging",
-        "Lekbak"
-      ],
-      "Expansievat": [
-        "Expansievat",
-        "Aansluiting",
-        "Bevestiging",
-        "Veiligheidsventiel"
-      ],
-      "CV-/warmtepompleidingwerk": [
-        "Leiding",
-        "Koppeling",
-        "Afsluiter",
-        "Beugel / bevestiging",
-        "Isolatie",
-        "Doorvoer",
-        "Label / markering"
-      ],
-      "Waterleidingen": [
-        "Waterleiding",
-        "Koppeling",
-        "Afsluiter",
-        "Beugel / bevestiging",
-        "Doorvoer",
-        "Keerklep",
-        "Label / markering"
-      ],
-      "Afvoeren / condensafvoeren": [
-        "Afvoerleiding",
-        "Condensafvoer",
-        "Sifon",
-        "Aansluiting",
-        "Beugel / bevestiging",
-        "Doorvoer",
-        "Open einde / uitmonding"
-      ],
-      "Regeltechniek": [
-        "Regelunit",
-        "Display / bediening",
-        "Sensor",
-        "Bekabeling",
-        "Aansluiting",
-        "Behuizing",
-        "Bevestiging"
-      ],
-      "Projectafhankelijke installaties": [
-        "Waterontharder",
-        "Vuilafscheider",
-        "Luchtafscheider",
-        "Hydraulische separator",
-        "Naregelingsmodule",
-        "Drukverhogingsinstallatie",
-        "Overige installatie",
-        "Aansluiting",
-        "Bevestiging",
-        "Afvoer"
       ]
     }
   },

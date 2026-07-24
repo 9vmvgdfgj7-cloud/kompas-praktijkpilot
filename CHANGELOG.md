@@ -27,9 +27,7 @@
 - TR-001 Warmtepomp behouden en opgenomen in dezelfde testversie.
 
 
-## KOMPAS Next v2.9.4 – Technische ruimte compleet
-
-- TR-003 t/m TR-010 toegevoegd.
-- Vloerverdeler met keuze met pomp / zonder pomp.
-- Boilervat/buffervat, expansievat, leidingwerk, waterleidingen, afvoeren, regeltechniek en projectafhankelijke installaties toegevoegd.
-- Alle kaarten volgen KP-001: uitsluitend objectief waarneembare afwijkingen, zonder specialistische metingen of functionele beproeving.
+## v3.0 Keukensprint (concept)
+- K-001 t/m K-010 toegevoegd als basisstructuur.
+- Kokendwaterkraan merkonafhankelijk opgenomen.
+- Configuratie Projectkeuken/Koperkeuken/Geen keuken voorbereid.
