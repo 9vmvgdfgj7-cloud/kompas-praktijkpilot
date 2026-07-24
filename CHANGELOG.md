@@ -42,3 +42,9 @@
 - Keukenkaartvelden, waarnemingen en intelligente teksten toegevoegd.
 - Kokendwaterkraan merkonafhankelijk opgenomen.
 - Platformonafhankelijke methodiek behouden.
+
+
+## v3.0.1 – Keuken klikherstel
+- Runtime-data gesynchroniseerd met kompas-data.json.
+- K-001 t/m K-010 zijn nu beschikbaar voor de router en openCard-logica.
+- Geen inhoudelijke wijzigingen aan de keukenkaarten.
