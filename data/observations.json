@@ -232,5 +232,107 @@
     "name": "Scope opleveringsinspectie",
     "category": "KOMPAS-basiskaarten",
     "cardType": "expert"
+  },
+  {
+    "id": "installatie_boiler_buffervat",
+    "name": "Boilervat / buffervat",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_expansievat",
+    "name": "Expansievat",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_leidingwerk",
+    "name": "CV-/warmtepompleidingwerk",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_waterleidingen",
+    "name": "Waterleidingen",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_afvoeren",
+    "name": "Afvoeren / condensafvoeren",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_regeltechniek",
+    "name": "Regeltechniek",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "installatie_projectafhankelijk",
+    "name": "Projectafhankelijke installaties",
+    "category": "Installatiekaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_configuratie",
+    "name": "K-001 Keukenconfiguratie",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_meubilair",
+    "name": "K-002 Keukenmeubilair",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_werkblad",
+    "name": "K-003 Werkblad",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_spoelbak",
+    "name": "K-004 Spoelbak",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_kraan",
+    "name": "K-005 Keukenkraan",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_kokendwaterkraan",
+    "name": "K-006 Kokendwaterkraan",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_apparatuur",
+    "name": "K-007 Apparatuur",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_installatiepunten",
+    "name": "K-008 Installatiepunten",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_tegelwerk",
+    "name": "K-009 Tegelwerk",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
+  },
+  {
+    "id": "keuken_projectafhankelijk",
+    "name": "K-010 Verlichting / projectafhankelijk",
+    "category": "Keukenkaarten",
+    "cardType": "expert"
   }
 ]
