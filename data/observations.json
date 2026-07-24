@@ -226,5 +226,11 @@
     "name": "Fontein",
     "category": "Sanitairkaarten",
     "cardType": "expert"
+  },
+  {
+    "id": "kompas_scope",
+    "name": "Scope opleveringsinspectie",
+    "category": "KOMPAS-basiskaarten",
+    "cardType": "expert"
   }
 ]

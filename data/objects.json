@@ -143,12 +143,18 @@
         "Montagevoet"
       ],
       "WTW-unit": [
-        "Behuizing",
-        "Bediening",
+        "WTW-unit",
+        "Display / bediening",
+        "Filter",
         "Filterdeksel",
+        "Condensafvoer",
         "Condensaansluiting",
         "Kanaalaansluiting",
-        "Ophanging"
+        "Ventilatiekanaal",
+        "Isolatie",
+        "Ophanging / bevestiging",
+        "Trillingsdemper",
+        "Geluiddemper"
       ],
       "Warmtepomp": [
         "Binnenunit",

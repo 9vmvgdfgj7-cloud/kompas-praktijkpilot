@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "KOMPAS Next v2.9.2 complete batch",
-    "subtitle": "S-003 Fontein · DV-001 Dekvloer–stelkozijn · TR-001 Warmtepomp"
+    "version": "KOMPAS Next v2.9.3 TR-002 WTW",
+    "subtitle": "S-003 Fontein · DV-001 Dekvloer–stelkozijn · TR-001 Warmtepomp · TR-002 WTW-installatie · KP-001 Scope"
   },
   "locations": [
     "Hal",
@@ -250,6 +250,12 @@
       "name": "Fontein",
       "category": "Sanitairkaarten",
       "cardType": "expert"
+    },
+    {
+      "id": "kompas_scope",
+      "name": "Scope opleveringsinspectie",
+      "category": "KOMPAS-basiskaarten",
+      "cardType": "expert"
     }
   ],
   "objects": [
@@ -397,12 +403,18 @@
           "Montagevoet"
         ],
         "WTW-unit": [
-          "Behuizing",
-          "Bediening",
+          "WTW-unit",
+          "Display / bediening",
+          "Filter",
           "Filterdeksel",
+          "Condensafvoer",
           "Condensaansluiting",
           "Kanaalaansluiting",
-          "Ophanging"
+          "Ventilatiekanaal",
+          "Isolatie",
+          "Ophanging / bevestiging",
+          "Trillingsdemper",
+          "Geluiddemper"
         ],
         "Warmtepomp": [
           "Binnenunit",

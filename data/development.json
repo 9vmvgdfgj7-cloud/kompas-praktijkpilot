@@ -45,7 +45,7 @@
   },
   {
     "item": "WTW-unit",
-    "status": "Toegevoegd"
+    "status": "TR-002 testversie toegevoegd"
   },
   {
     "item": "Warmtepomp",
@@ -78,5 +78,9 @@
   {
     "item": "Berging en technische ruimte",
     "status": "Basis aanwezig"
+  },
+  {
+    "item": "Scope opleveringsinspectie",
+    "status": "KP-001 toegevoegd"
   }
 ]
